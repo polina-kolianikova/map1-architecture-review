@@ -1,0 +1,11 @@
+[Unit]
+Description=Aggregate Map1 processing budget (opt-in; no work is started)
+
+[Slice]
+CPUAccounting=yes
+MemoryAccounting=yes
+TasksAccounting=yes
+CPUQuota=400%
+MemoryMax=8G
+MemorySwapMax=0
+TasksMax=256

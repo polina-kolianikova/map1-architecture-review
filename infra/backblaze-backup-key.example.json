@@ -1,0 +1,10 @@
+{
+  "accountId": "REPLACE_PROJECT_ACCOUNT_ID",
+  "keyName": "map1-netcup-backup",
+  "capabilities": [
+    "listAllBucketNames", "listFiles", "readFiles", "writeFiles",
+    "readFileRetentions", "writeFileRetentions"
+  ],
+  "bucketIds": ["REPLACE_PRIVATE_PROJECT_BUCKET_ID"],
+  "namePrefix": "map1/"
+}

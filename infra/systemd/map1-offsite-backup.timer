@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily encrypted Map 1 external backup
+
+[Timer]
+OnCalendar=*-*-* 02:30:00 UTC
+Persistent=true
+RandomizedDelaySec=20m
+Unit=map1-offsite-backup.service
+
+[Install]
+WantedBy=timers.target

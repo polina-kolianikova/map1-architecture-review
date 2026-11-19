@@ -1,0 +1,2115 @@
+{
+  "status": "ready_for_architecture_review",
+  "original_source_files_accounted_for": 329,
+  "original_source_directories_accounted_for": 35,
+  "missing_source_files": [],
+  "missing_source_directories": [],
+  "file_decisions": [
+    {
+      "path": ".github/workflows/security-checks.yml",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Original workflow stages retained; unfilled placeholders validated without environment resolution.",
+      "sha256": "bd9bf2cac979fbe10d82411dd45687c1917c2a2b4d91c4ef6ba985bd35449dfe"
+    },
+    {
+      "path": "backend/.dockerignore",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "13c3c438b2c8e139320fb42c0bd0935997facd3d8f0ab316c1ec8704edbaf1d6"
+    },
+    {
+      "path": "backend/Dockerfile",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "65c587b34154cb7c6403fe9099513efaf94c3aabdaa44d97ff0de4817fe2bf2c"
+    },
+    {
+      "path": "backend/alembic.ini",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Original implementation retained with local connection defaults, explicit database failure handling or portable configuration.",
+      "sha256": "74dee6c07f56f1aa4c654adbe603b6bbc236ffe6c2acd80f95b894a25a4f6ef0"
+    },
+    {
+      "path": "backend/alembic/env.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "7b0b7f191990f6d807ffd1d6916f97d49398eb81d096bc68a000d2af0d7da28b"
+    },
+    {
+      "path": "backend/alembic/script.py.mako",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "1af9500565a68f25dfe5cf96ecd57cd0803d33f028a4e5914afa5a426c6ef2fc"
+    },
+    {
+      "path": "backend/alembic/versions/20260527_0001_initial_postgis_schema.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "761817a45a74c88cbf367465b68853738e9443cef54c321a0708c0b7a55480ce"
+    },
+    {
+      "path": "backend/alembic/versions/20260528_0002_verification_metadata.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "5e375cbff631309ae2c1de160c2173795189e0550dbe534454452c9baa1ad685"
+    },
+    {
+      "path": "backend/alembic/versions/20260608_0003_audit_trail_scalability.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "5487c8771b3992419c2de4516dfdb7fa5b2a9c3cb11386048af7dc42a1920e42"
+    },
+    {
+      "path": "backend/alembic/versions/20260610_0004_protect_verification_audit.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "45c92a89a9e58b7ac98640c15cebca03b0d5545020375808a6c1ea6d775b9b89"
+    },
+    {
+      "path": "backend/alembic/versions/20260616_0005_refresh_audit_hardening.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "d7dab325d00f687a54e0e374b3d701a68a861b2ff49333abd4a04488f5725d49"
+    },
+    {
+      "path": "backend/alembic/versions/20260616_0006_block_audit_truncate.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "f84a5d32629c842d9b35fefb39857b4c03a892973381860c313c5c1604e89af2"
+    },
+    {
+      "path": "backend/alembic/versions/20260616_0007_current_layer_a_uniqueness.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "7fec135814d5e34606aaadb14f751284436b30e3aac60b9c1719aed5e3b8c1d9"
+    },
+    {
+      "path": "backend/alembic/versions/20260616_0008_current_sentinel_uniqueness.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "30627551b1d36fba69ac3519095f20ac28285ee0c76936f9fc7c810db2a4db16"
+    },
+    {
+      "path": "backend/alembic/versions/20260616_0009_repair_current_verification_results.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "b845f792f5335c8e254d74ead4c9c3b97ff868912b8f65d78be8148994531255"
+    },
+    {
+      "path": "backend/alembic/versions/20260617_0010_source_checks.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "ba90a3faab529e768154f93cd511b4c19dcc19a9ef65cd0b54f68ca0cabce479"
+    },
+    {
+      "path": "backend/alembic/versions/20260619_0011_audit_read_indexes.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "6c07803e73fde23a0d71cecbf51687cce5d5fa31e35f2ea48a666e1db5f998b4"
+    },
+    {
+      "path": "backend/alembic/versions/20260707_0012_carbon_assessments.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "7086f35747ba7fec08be717842684b4147b645e392ac108798a4f0f8298511ab"
+    },
+    {
+      "path": "backend/alembic/versions/20260707_0013_stage3_asset_query_indexes.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "185d3fb17dd3545b645acf7735d7a44864a825acb50277c220bf04a846b01321"
+    },
+    {
+      "path": "backend/alembic/versions/20260707_0014_carbon_assessment_provenance.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "7ddd27d222af46c046043df9f0716b626e2884ea0f707d5e1b521b4c8fa509da"
+    },
+    {
+      "path": "backend/alembic/versions/20260707_0015_carbon_assessment_audit.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "664198390a401ada5f5ef67811279aee51e94bfe927027925f0fb9b7696519b6"
+    },
+    {
+      "path": "backend/alembic/versions/20260707_0016_stage3_scope_indexes.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "04f832090d00ddc8fe87670f4feb70bfb5afe97c7a7ce3e05ff2dfae25a09db9"
+    },
+    {
+      "path": "backend/alembic/versions/20260707_0017_stage3_grid_generation_runs.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "71c61d4d75aa04658287a50d24dbc4abd43e72353bcbf29958c360f9fa3afd9b"
+    },
+    {
+      "path": "backend/alembic/versions/20260708_0018_stage3_read_grants.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "8fe291ea799eb38ef274e489128fed0e6d979a63a8c33cbd9ccfd05a20492710"
+    },
+    {
+      "path": "backend/alembic/versions/20260713_0019_stage3_layer_a_ingest_runs.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "baf67a273943a1cb34b988bb568a3974e7795dfabdebb681bb17fb28301e13de"
+    },
+    {
+      "path": "backend/alembic/versions/20260721_0020_region_metadata.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "535cfd4217116ff91de0dc0bb8d90a5f07f3fa8c3be05f49b41efc7b4038948e"
+    },
+    {
+      "path": "backend/alembic/versions/20260724_0021_carbon_audit_fk_hardening.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "3cc7f1476006d3d65020551eadc747fbc834fe74ec041c233884c13c62d05dc5"
+    },
+    {
+      "path": "backend/alembic/versions/20260726_0022_stage3_scope_columns.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "7975691d24c2e0776e830e8782415b26bd4502af2e9c4d2514250a6c32285815"
+    },
+    {
+      "path": "backend/alembic/versions/20260727_0023_grid_cells_clipped_geometry.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "4ed209ee86677442852d9ddcc3aa621d08b77057e793c829007e64e80741359b"
+    },
+    {
+      "path": "backend/alembic/versions/20260729_0024_stage3_partition_read_grants.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "27cd218c5c69ef7aeeb435d234d7fcfea379bbe644eb27a7aa3f5d35157e6ab8"
+    },
+    {
+      "path": "backend/alembic/versions/20260801_0025_stage3_source_mask_cache.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "9a5d44e15990ab7dad048f3c0a4ed49b485540a0a0aee75debe580c5381d1993"
+    },
+    {
+      "path": "backend/alembic/versions/20260806_0026_stage3_region_mask_components.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "aa9376c4729e8bd41b9c744d6b5791c4a91ef0a0c1a180601685c0a08d8dccf2"
+    },
+    {
+      "path": "backend/alembic/versions/20260806_0027_stage3_grid_asset_register_id_index.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "4899f6ad02de811a8ca23d5f1afc250f2325edfaa61756c6cf674106d9bddd65"
+    },
+    {
+      "path": "backend/alembic/versions/20260806_0028_stage3_carbon_read_indexes.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "da6fe00fc1a7eaefcf6b185af055bfa3d3a7f1f4c2c60a3f3451ee2fb809a01c"
+    },
+    {
+      "path": "backend/alembic/versions/20260806_0029_stage3_carbon_audit_lookup_index.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "798753dcee7c352ce79a7a0c68fb120eec69b748e60523371edd92eef8e29f0d"
+    },
+    {
+      "path": "backend/alembic/versions/20260812_0030_grid_cell_area_precision.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "b9f84b302929bc16eab188fabdf3d199eafd60b30ccb2e85ad142c6ddb85223f"
+    },
+    {
+      "path": "backend/alembic/versions/20260817_0031_stage4_layer_b_automation.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "f8fbab013e40ad6231f280b420982c8e2a52f84717f1d6b1317f58f2921e4fc7"
+    },
+    {
+      "path": "backend/alembic/versions/20260822_0032_stage4_run_lookup_indexes.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "58255a97e9fdf88004b1299306947e5db922a52b6c4e33ec4523755f1c95fe4c"
+    },
+    {
+      "path": "backend/alembic/versions/20260825_0033_stage5_carbon_surfaces.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "c905e22d3646aa6c8353912ac28a785a03a4c76864ae9a1b281ac16172733e79"
+    },
+    {
+      "path": "backend/alembic/versions/20260826_0034_stage5_summary_cache.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "4e3b72b8ff4ed6f16050730872762996e3a7b52c1bcfe824d84855fc395adcb0"
+    },
+    {
+      "path": "backend/alembic/versions/20260828_0035_stage5_hardening.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "3ebc0668957a92c548ab9ca6532163679fa61232fc2732bc756bd2087124cd2f"
+    },
+    {
+      "path": "backend/alembic/versions/20260828_0036_stage5_source_run_summary_index.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "6ff7fd056ef56725cabe121eb269a410bbb5f28c9dc669eb3d52447f86582f80"
+    },
+    {
+      "path": "backend/alembic/versions/20260830_0037_stage5_annual_increment.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "46844dddd5782cb76e80f7fc0682bcaac88232a15b468a6c58fe41679fe46225"
+    },
+    {
+      "path": "backend/alembic/versions/20261105_0038_stage3_source_cache_parcel_index.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "33aecd7d928876e066f15c0200943592a35979dc48a1721a3776195d8b75dccf"
+    },
+    {
+      "path": "backend/alembic/versions/20261107_0039_stage3_landcover_generations.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "b7c040a3fe927b6c45eac0f5760dc5be2447feeeaf44a56377714e1ae8ab4b96"
+    },
+    {
+      "path": "backend/alembic/versions/20261115_0040_stage3_grid_repairs.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "0f3b466cf3d7bb68e1cb35415f2d253a9a8ac0ddc913dc8d53b037b217fa830e"
+    },
+    {
+      "path": "backend/alembic/versions/20261117_0041_verification_mirror_writer.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "6852cb0a2dfecf2479cd68e7d1f855baf76155b31653bb08c30765f9e96d89a4"
+    },
+    {
+      "path": "backend/alembic/versions/20261117_0042_observation_mirror_lookup.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "82b9114e61f1848e5ce99c109b96cc9fb4d1ad43f14ce3b8c13c5d49b916d7d7"
+    },
+    {
+      "path": "backend/alembic/versions/20261117_0043_verification_mirror_lookup.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "b9dc6daeb0e29eaf77c29a4ceca6f6834e62db00a228c6648238e8c11e6896a1"
+    },
+    {
+      "path": "backend/alembic/versions/20261117_0044_processing_custom_plans.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "75544555b02de31a1414f8e7f3505734a496c7d3a8a7a3a1581713442abcc3b9"
+    },
+    {
+      "path": "backend/alembic/versions/20261117_0045_dashboard_observation_indexes.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "14f89eade77f0541b801f49050a1890c37c78e734e8ea669e912af0d278e12fd"
+    },
+    {
+      "path": "backend/alembic/versions/20261117_0046_dashboard_admission_statistics.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "a8b5cfb6fa7a08bb126f47ac6fcab97c00e96739c205387cb39c53c2860c9ac4"
+    },
+    {
+      "path": "backend/alembic/versions/20261117_0047_dashboard_verification_counts.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "514b45f6f169723ad17e1f63f955c69e327d944f89fd97aeb3a3966fbc7c5e73"
+    },
+    {
+      "path": "backend/app/api/__init__.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Original implementation retained with local connection defaults, explicit database failure handling or portable configuration.",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/app/api/health.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "64790c0367a4f3cd4c0551dd7bdfae7fdb0fe2c51f8bfb937c2b9c500501d11f"
+    },
+    {
+      "path": "backend/app/api/meta.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "50bccc5daf0797d86aece65e57234d91a8af70f190da75144fd9865519015e65"
+    },
+    {
+      "path": "backend/app/api/stage1.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "040d3b2788e5ba490faae465b378c1fd1f25e0bebea39c6585bd564ecfe517c9"
+    },
+    {
+      "path": "backend/app/api/stage2.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Private mathematical fallback expressions removed; actual stored-output and spatial read implementations retained.",
+      "sha256": "474e02fa80ce0c536f730ca22f5bd392cbb3405e5d704fd3d3529087b7532922"
+    },
+    {
+      "path": "backend/app/api/stage4.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "ed6c11a8dea40411168f3d0e37e11a2b4131e0c84f7acdfc4095bab995cc19de"
+    },
+    {
+      "path": "backend/app/api/stage5.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Private rules/configuration endpoints are 501; actual stored-result status/report/export implementations retained without private coefficient loading.",
+      "sha256": "011e6abb33e26797c911ab1d23905de2551df4e4b3bfe092d8b0b32b20e3e242"
+    },
+    {
+      "path": "backend/app/commands/__init__.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "backend/app/commands/backfill_stage4_area_coefficients.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "4254957a113f2f5ad6951095315734b92563202224e648c2ad3ae6fe9471ab79"
+    },
+    {
+      "path": "backend/app/commands/backfill_stage5_annual_increment.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "private calculation producer boundary.",
+      "sha256": "f806891fc56b529452f63f6b1da064624a2be5052e634393d4249d2ab43c9d65"
+    },
+    {
+      "path": "backend/app/commands/check_ogm_vector.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "bfcc3b3c0e63e846f7074c01f74261b5e63a4e9daddd636d6f7ee0d77e1ddc4e"
+    },
+    {
+      "path": "backend/app/commands/check_ogm_wms.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "8aff91b9ec23edecc726ac125b77696965608d0fcd48b891cac2ee7d4c8d36ba"
+    },
+    {
+      "path": "backend/app/commands/check_stage3_clean_mask_components.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "45020e6571e46680a8f2d31b48d4bb54b211018da2e8101ae18c4d6db7190421"
+    },
+    {
+      "path": "backend/app/commands/check_stage3_clean_mask_integrity.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "5f0bf21926abe93ad7e6890482491587a9de43cf25a671ee5c29e4545cd7a108"
+    },
+    {
+      "path": "backend/app/commands/check_stage3_forest_clip.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "1e3e8c754435c19ccf0a77678a2ef66ccd3508ece6a5a4858140c97411b083ae"
+    },
+    {
+      "path": "backend/app/commands/check_stage3_grid_mask_proof.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "85d6456b274dff75912312b8da600221d84636e0ff5c78098ae898c4dbcfd704"
+    },
+    {
+      "path": "backend/app/commands/check_stage3_grid_spatial_integrity.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "22c0658b1c3dcf595e32f8d49b9ed489bf40b1040a8bb617937dc6102277fc70"
+    },
+    {
+      "path": "backend/app/commands/check_stage3_mask_source_agreement.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "9bb0e26a4ae68caf991b68933420c4c69dbe57bc413b44db31ce6060e5c3712f"
+    },
+    {
+      "path": "backend/app/commands/check_stage4_automation.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "7d9ca9d6b8d02bd23f9863f387966091c84e5297e5598b54331920c2b7780f02"
+    },
+    {
+      "path": "backend/app/commands/check_stage4_public_scaling.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "3573361a8ced428a72c9a224926c243f5d1b589f5c77c9008b12d136b607b454"
+    },
+    {
+      "path": "backend/app/commands/fetch_cdse_ndvi.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "ffd7fc79cf94d17325abe118c7c32b9782f3bc72e25436738b35444485e7740b"
+    },
+    {
+      "path": "backend/app/commands/filter_stage3_region_components.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "ba77dc642a8ed54532e2fb60d18de39608cdac60750516548f4c2c558349825d"
+    },
+    {
+      "path": "backend/app/commands/generate_test_grid.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "331290b6ca6a779a26fe76fd29058bc8c49bc3d7faf1345be7c9543876037a10"
+    },
+    {
+      "path": "backend/app/commands/import_stage4_batch_statistical_results.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "4eec02829622a2b85610021badd3adbccbae3fa688a6085c09917503d2e507e9"
+    },
+    {
+      "path": "backend/app/commands/ingest_ogm_test_subset.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "357a85f0b491aed5c65b0d19e06c8a7ba0f79c5e6961d7e7577bb6808f16381f"
+    },
+    {
+      "path": "backend/app/commands/ingest_osm_forest_mask.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "569bcb42e8bd726adf8873b1d712146c7a817479cef0585cb9c0fa2a5e0c812e"
+    },
+    {
+      "path": "backend/app/commands/ingest_osm_nonforest_exclusion.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "257fce603ab5a85c55fe9a02255c2e91ecdf550208d90c1ab79e23fc21dcf8f3"
+    },
+    {
+      "path": "backend/app/commands/ingest_osm_pbf_masks.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "f93a8347dfb98a73324cb50185ce7a2e62c2c17266240c53580e18906ef755fc"
+    },
+    {
+      "path": "backend/app/commands/ingest_worldcover_nonforest_exclusion.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "273d21bfda1d26c49a0ae6e7538a257f0ec2e93ca6f8b3c960af9c19a2b1910c"
+    },
+    {
+      "path": "backend/app/commands/inspect_ogm_endpoints.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "477af1340ee6696b8b694ec282a64baab2c79383da1f9f5b0eb12c9acd4d7a82"
+    },
+    {
+      "path": "backend/app/commands/prepare_stage3_source_mask_cache.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "90b9809e07d6e85aaf792a05dfe036d0603039d8265f62ad32d8e7ba498ac36c"
+    },
+    {
+      "path": "backend/app/commands/prepare_stage4_batch_statistical_inputs.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "6a89d61110394c0c0c624124be2af410f6d8f3af13d48b2ce92029c15d299649"
+    },
+    {
+      "path": "backend/app/commands/prepare_stage4_public_raster_zonal_inputs.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "3034d8a9614fe056b5f9466d4619df1b5fd2af9774ce1ccc68cdbb6bf38a3ba1"
+    },
+    {
+      "path": "backend/app/commands/resume_stage4_run.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "5b36f9cbd3f42d88c693730a6f5494c44d11c501293b0409be5763493bf33782"
+    },
+    {
+      "path": "backend/app/commands/run_stage1_demo_flow.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "private calculation producer boundary.",
+      "sha256": "38bc1881ea8cb4de0910db389e1bd6af4ead66401f227983459394b4150f3db5"
+    },
+    {
+      "path": "backend/app/commands/run_stage1_pipeline.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "72b48e9123f27baae266ac21bb3a13c26c1478283eef7aaffd9636a3d805f9b2"
+    },
+    {
+      "path": "backend/app/commands/run_stage1_verification.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "private calculation producer boundary.",
+      "sha256": "13ebb6fec82257582edfe51112a4171cf0bf854b8e5b18f0656eb8037c48b043"
+    },
+    {
+      "path": "backend/app/commands/run_stage3_carbon_assessment.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "private calculation producer boundary.",
+      "sha256": "3058b4341ea5ab29aeebc263eca79af05b5fc00fc9e8e42dbf6971b32d61ab70"
+    },
+    {
+      "path": "backend/app/commands/run_stage3_contract_audit.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "f3770c3f4ed5ff4d0f8042e69485ff66f0a3232916c5c5044b809d2477160e79"
+    },
+    {
+      "path": "backend/app/commands/run_stage3_contract_plan.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "a6c539377c6b1a5881d68dfd668dade683d492717785cc12c30d345b03d47ff4"
+    },
+    {
+      "path": "backend/app/commands/run_stage3_grid_generation.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "71a549d60bf7c97564d9a9b13e1efcabde7599245c48cccb902c3d64cc8d1243"
+    },
+    {
+      "path": "backend/app/commands/run_stage3_grid_generation_batched.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "dac826ae7a66df39a348119096c22375821219904e43e15d1851930b6ab5ca74"
+    },
+    {
+      "path": "backend/app/commands/run_stage3_layer_a_ingest.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "79913a38fabab95f5a98afc4774280512b9dead28e314824fa52514a4fdc9d84"
+    },
+    {
+      "path": "backend/app/commands/run_stage3_official_layer_a_import.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "5f168a46d85b457bbce402881046083080730e49b484803a34ac1fd1da529363"
+    },
+    {
+      "path": "backend/app/commands/run_stage3_partition_rollout.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "87543f3091e0f24769ff592acebfcc6e3d28f516373887c46f6f234706386b3f"
+    },
+    {
+      "path": "backend/app/commands/run_stage3_performance_baseline.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "e077f14ad6bcbc2ac0869e3f7c7471ecec43c34ae09d487dd83cd1f0e214e753"
+    },
+    {
+      "path": "backend/app/commands/run_stage3_prepare_region.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "6e841007d41a9dd3d32e6c8b04358dbc6495e458334d6e46be117903767f8572"
+    },
+    {
+      "path": "backend/app/commands/run_stage3_prepare_region_fragments.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "670d9c1c485672a264d138293080fbcdd28466b71b90db0b308bc9f944bfa775"
+    },
+    {
+      "path": "backend/app/commands/run_stage3_readiness.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "ea7189b21994ab829bcbd05cf1116b796ad4fb47b9c6c27a01e7eb715d45354a"
+    },
+    {
+      "path": "backend/app/commands/run_stage3_scale_hardening.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "1760beceb93b809c9150c882d30eff2493b7cf0a7b9d257a48b931fe21b37ee6"
+    },
+    {
+      "path": "backend/app/commands/run_stage4_automation_plan.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "4003cf34c1f2b9a609d5b1a897b5fb1b017239b68ddb454795c21b2830f4e03a"
+    },
+    {
+      "path": "backend/app/commands/run_stage4_public_proof.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "3280af0777dc6072f4ca6ebcdd80b7850085f3dc493249fb969ea74520826074"
+    },
+    {
+      "path": "backend/app/commands/run_stage5_carbon_assessment.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "private calculation producer boundary.",
+      "sha256": "a9f73998fbe602bdd265e836fa7da210abfa8d44a33fd409cb2032f7a7cb4f83"
+    },
+    {
+      "path": "backend/app/commands/warm_stage2_mask_tiles.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "3781f0c70dcfdcd4c22ee61e40a02cd7e6cc89a9dc6de37319d772da605a9fc2"
+    },
+    {
+      "path": "backend/app/core/__init__.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Original implementation retained with local connection defaults, explicit database failure handling or portable configuration.",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/app/core/config.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Original implementation retained with local connection defaults, explicit database failure handling or portable configuration.",
+      "sha256": "c61f3cdef7342adde2b348fd09472c36d234b4db31f6e7163f666774a8f5e407"
+    },
+    {
+      "path": "backend/app/db/__init__.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Original implementation retained with local connection defaults, explicit database failure handling or portable configuration.",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/app/db/session.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Original implementation retained with local connection defaults, explicit database failure handling or portable configuration.",
+      "sha256": "ad23324380d3820696799f33418732a158b85a3414133a97588df84869b3f2a3"
+    },
+    {
+      "path": "backend/app/main.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Original implementation retained with local connection defaults, explicit database failure handling or portable configuration.",
+      "sha256": "aa06a82d6fd9e6b2de00fef5996247d43bfcfeb5dfb4406e2bb0485418588b8d"
+    },
+    {
+      "path": "backend/app/services/__init__.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Original implementation retained with local connection defaults, explicit database failure handling or portable configuration.",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "backend/app/services/carbon.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Private calculation implementation or coefficient configuration replaced by explicit unavailable boundaries.",
+      "sha256": "916d080df1345de1859b009024fdbec8709fce96dd79b5fce922fd226585368f"
+    },
+    {
+      "path": "backend/app/services/carbon_baseline_ipcc_v0_1.json",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Private calculation implementation or coefficient configuration replaced by explicit unavailable boundaries.",
+      "sha256": "7a2984dc20561e58c1c3695228af11586526bc99f3b5c0ab3c8d6546ae7f4827"
+    },
+    {
+      "path": "backend/app/services/carbon_methodology.json",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Private calculation implementation or coefficient configuration replaced by explicit unavailable boundaries.",
+      "sha256": "7a2984dc20561e58c1c3695228af11586526bc99f3b5c0ab3c8d6546ae7f4827"
+    },
+    {
+      "path": "backend/app/services/cdse.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "9c564ba0b8e62534377ac779145b4d2b296e0220746df5b9a8ab02d7d84d6c57"
+    },
+    {
+      "path": "backend/app/services/dashboard_summary_cache.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "c541c07a15fb0789f7c83b694e5899a0246a60e6e2cb756b9971639f20dfd4e5"
+    },
+    {
+      "path": "backend/app/services/dates.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "e3c8fcc53bc2b86f6199e2b69a3382d03d57def572174720be861f01e8d05cd2"
+    },
+    {
+      "path": "backend/app/services/forest_scope.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "7a98d5a70f9979dc173a6459b930eba6b7a4c0afcd692a0d155ea75f1422f6fc"
+    },
+    {
+      "path": "backend/app/services/grid.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "76dc96bd3c9f469395ec8c2cd847621ee3427f63386450875802ad60061847e1"
+    },
+    {
+      "path": "backend/app/services/localization.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "468df41b437b1b9fe8f412ac473e305889c65f51d1fb09f2dacc7ba514f1c74e"
+    },
+    {
+      "path": "backend/app/services/ogm.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "f78269da3cf07a633593587dc90b1224c5c85f366c402d64eb02dba304b807d8"
+    },
+    {
+      "path": "backend/app/services/ogm_webmap.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "9f7e948f043c7747068f75d6207ecca40f665fa41b3a64f77e895ad4ad3e55fe"
+    },
+    {
+      "path": "backend/app/services/source_strategy.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "28db97802eaf9a4534c7d2e18a63b80fc00b1669dcd09e6b7aefe57fc968749d"
+    },
+    {
+      "path": "backend/app/services/stage2_tile_cache.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "30ea8401c038578fbac87447313792d7c7fc0d1e30c61538b1f5953757d1d431"
+    },
+    {
+      "path": "backend/app/services/stage3_grid_options.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "0af14951ded8b0ecde0a9b6c792e659ae2b735e191440d0cf6d46f8b0e12d6e0"
+    },
+    {
+      "path": "backend/app/services/stage3_partitioned_reads.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "74f52ae21622fd85643ca1b3b223e9e142a482b063f34c62562057dea98cbf01"
+    },
+    {
+      "path": "backend/app/services/stage3_public_v9.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "f7472d41d108e78ef4d0558c1bc7ec47f59c67e7ed4f74970dca4609a499e684"
+    },
+    {
+      "path": "backend/app/services/stage4_automation.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "specific private function or fixture redactions.",
+      "sha256": "03efd5f052f2e62bbffc6a8a33f44c8f6f6e656d280bd450bba53f7569785176"
+    },
+    {
+      "path": "backend/app/services/stage4_celery.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "2ef40916658fa00bc1618fcd72303259c5162c0355eef6f96c4304e0fcfdb087"
+    },
+    {
+      "path": "backend/app/services/stage4_providers.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "ae5db549f03eab16cc4c583dad240ad31d484446621847f78e40d96a14734d51"
+    },
+    {
+      "path": "backend/app/services/stage4_public_cog.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "ff0026ee9133722371c372268c3f72de5b7932544e08db012220b0c87a971aae"
+    },
+    {
+      "path": "backend/app/services/stage4_public_sources.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "6c85682be6ab4064653bc1e9d3331bd2ab3963fa855617934b18d710ae8a9893"
+    },
+    {
+      "path": "backend/app/services/stage4_storage.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "08c40a945eb105900f196439fbf45dcf4bb77cc2b0f38a75bbeb4eb0f44756ad"
+    },
+    {
+      "path": "backend/app/services/stage5_carbon.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Private calculation implementation or coefficient configuration replaced by explicit unavailable boundaries.",
+      "sha256": "f79c5ca7742942adf145986d16ce79ab19c28a9200bdb51eb1b633300651e978"
+    },
+    {
+      "path": "backend/app/tasks/__init__.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "ba1622d4602019e7a62664db783ad009f8853a15e3aeceb0e4631fb014b6d90f"
+    },
+    {
+      "path": "backend/app/tasks/stage4.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Original orchestration source retained with private producer execution guarded.",
+      "sha256": "f47e9f10be6ceddd172b9f5cf8f98e1703d54faa5a7f6a42a0c666d38586e317"
+    },
+    {
+      "path": "backend/app/worker.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Original orchestration source retained with private producer execution guarded.",
+      "sha256": "c57ef3c5a65a5058af4b4b9ab47b7a7556c874751aba0dde8992b066c64806d0"
+    },
+    {
+      "path": "backend/requirements-dev.txt",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "93c4ab5f175d24229e46ec70a8ecaeb6db8b36e3f54d8005808044c060acbc92"
+    },
+    {
+      "path": "backend/requirements.txt",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "387b15fc273877a6ac50384829fe7d4d9d58305f1404f0958e1d9e66745f04fd"
+    },
+    {
+      "path": "backend/tests/test_carbon.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "private calculation fixtures.",
+      "sha256": "00c02dbb5ac9d631b4623ff63a6d7d9964c44f7465021ebe798d547dcaabd14d"
+    },
+    {
+      "path": "backend/tests/test_cdse.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "0f6cd8e38715c30a7f1de1fecda82a4ef6dc53db58ee6bcd04a7878245e8201c"
+    },
+    {
+      "path": "backend/tests/test_cdse_ndvi.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "5ae0940936c7c1f1b14146184dfb9eba6b7dac4f139f4b49a41ba43650260594"
+    },
+    {
+      "path": "backend/tests/test_config.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "faa8f9203db630effe36e1967de4da4955a1c8554f16d83f93289983739328d6"
+    },
+    {
+      "path": "backend/tests/test_migration_graph_closure.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "4d0192f3373b651cd6cb6be481073e288b367835401f56131877f5da8fed47ff"
+    },
+    {
+      "path": "backend/tests/test_ogm.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "e30258fc446c2bc156e2aeba70809d6f24c894eb5ba565a708961548e113206f"
+    },
+    {
+      "path": "backend/tests/test_ogm_ingest.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "235d2e46a26988c8af9b0d65c637a92290673e53e3e04277261098903351ec19"
+    },
+    {
+      "path": "backend/tests/test_ogm_webmap.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "7b4588bc2a006c391222be6cf96f2064e547fda63cbc4b8e98458961e276ca5a"
+    },
+    {
+      "path": "backend/tests/test_osm_forest_mask.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "93f0ced59c35167bebf02469d5f3ab68db8a71c9e6f6c49690b9dec2189d7ee5"
+    },
+    {
+      "path": "backend/tests/test_osm_nonforest_exclusion.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "db9a7f508f6336e823738f59f8877eec7ae2c8514a775bf175e971ba2f933a5c"
+    },
+    {
+      "path": "backend/tests/test_osm_pbf_masks.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "bff2dd01897362af806aaa41b51fe6c260ca4f7cecb90f6095351d9fe3e80968"
+    },
+    {
+      "path": "backend/tests/test_stage1_api_helpers.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "7d873209932bbd96be360cbaf28c126b4d7d255d4142a0c77b7c05827f085fb9"
+    },
+    {
+      "path": "backend/tests/test_stage1_cdse_ndvi.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "50ca0984ae437559bdb52e530ec3486c2f6391b38302964ddf25e55d3cec9754"
+    },
+    {
+      "path": "backend/tests/test_stage1_observation_sources.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "dc9004031f92378d52f29f2b1bd88510b5c85963d4816e86578a18d911b4b580"
+    },
+    {
+      "path": "backend/tests/test_stage1_params.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "70d99c3c94330cc9bed063f440c2c85dc39b545072e5c107a4d7e42aa87a0445"
+    },
+    {
+      "path": "backend/tests/test_stage1_verification.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "private calculation fixtures.",
+      "sha256": "00c02dbb5ac9d631b4623ff63a6d7d9964c44f7465021ebe798d547dcaabd14d"
+    },
+    {
+      "path": "backend/tests/test_stage2_api_helpers.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "f28d5748a61963d71e857841645111a145b5eee2ed39289803cb139787cc01ff"
+    },
+    {
+      "path": "backend/tests/test_stage3_carbon_assessment.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "private calculation fixtures.",
+      "sha256": "00c02dbb5ac9d631b4623ff63a6d7d9964c44f7465021ebe798d547dcaabd14d"
+    },
+    {
+      "path": "backend/tests/test_stage3_clean_mask_components.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "ffc49d09dc461fa6bf7c62cbbde044ed60acde3eab689dc6778826b8258e9fe2"
+    },
+    {
+      "path": "backend/tests/test_stage3_clean_mask_integrity.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "bac02de372b9fb62ed32810485e4ba3e443831968725839546a4106eefe41e4c"
+    },
+    {
+      "path": "backend/tests/test_stage3_contract_audit.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "3c4aa9e707ab9b76035e28143eb2892fb2d089f23225633cc6720686ce2ed88d"
+    },
+    {
+      "path": "backend/tests/test_stage3_contract_plan.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "055c93cfc827946d7305713b39c6372fecf4145c38e2f01d3828cad3bcb03531"
+    },
+    {
+      "path": "backend/tests/test_stage3_filter_region_components.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "5462b0c6eee16bdfb5ad1feb763f710308a793263e0ac3b2ee7aac85b7f7bbf5"
+    },
+    {
+      "path": "backend/tests/test_stage3_forest_clip.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "609765cde3adf40ddbd9ec15426b576ad5c197b2574daebb49f5a7aba816ac60"
+    },
+    {
+      "path": "backend/tests/test_stage3_grid_generation.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "9c744bb68e1c6e91e2e82d1f75dbf3c26a330fe903b1f5a3f567c5462cf1026a"
+    },
+    {
+      "path": "backend/tests/test_stage3_grid_spatial_integrity.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "d1b62523063213cdf48eb48abcf00bf1e4bfaa2c1d55fd7d1628467157906b61"
+    },
+    {
+      "path": "backend/tests/test_stage3_layer_a_ingest.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "01eeab105f81c6a6f83635296a293c5b59a21e1092aea97d6960b659b8fc9fe2"
+    },
+    {
+      "path": "backend/tests/test_stage3_mask_source_agreement.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "90e3258ddb22dff1c569f6452c091c44668422c99b198a4211bff551baf2544b"
+    },
+    {
+      "path": "backend/tests/test_stage3_official_layer_a_import.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "0c269d5b1c8ee53b18f043a07dc21f29e990603679d7d4392fdff8a7d93b5f60"
+    },
+    {
+      "path": "backend/tests/test_stage3_partition_rollout.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "0e9fb5cbaa854366220a0ca082b1e21e90e56a949f18ee37079791bb92236326"
+    },
+    {
+      "path": "backend/tests/test_stage3_performance_baseline.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "2abc3cc9f35c2c3dc9ab9f3438df5eeae7ec679a969ab797edabd19bd4d0a86a"
+    },
+    {
+      "path": "backend/tests/test_stage3_prepare_region.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "c14b9d479468ae1e68d74a7b17b384bd15cbdaf601c02663086abd5c20fbb9d0"
+    },
+    {
+      "path": "backend/tests/test_stage3_prepare_region_fragments.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "ef75d9a73af37f89a0f7adad44c03ab829996bd4133c389648f8408edad0e80a"
+    },
+    {
+      "path": "backend/tests/test_stage3_readiness.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "7a3748d1ab78490d38f985a1292b1a93792f8ecd0d38c9da2b13fefdf73e91a4"
+    },
+    {
+      "path": "backend/tests/test_stage3_scale_hardening.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "8fffe4f1e9aca0f1c06fe10c571a0b3e562e3fe44bc9ab2c1422cd0eb2e6b8f3"
+    },
+    {
+      "path": "backend/tests/test_stage3_source_mask_cache.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "907100dd2597afc62dcce5e7b449d151a86f3be1be7adf9efa6619d2bdf6b667"
+    },
+    {
+      "path": "backend/tests/test_stage4_automation.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "specific private function or fixture redactions.",
+      "sha256": "2883551de5fabc802c49a8aaeefd78764e79f4d7edad57c42b7ae1020612ee29"
+    },
+    {
+      "path": "backend/tests/test_stage4_public_cog_radiometry.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "c2a401de7e8f472c617fdd17cd4a34555a7abfc4f88493f02794534da34707f7"
+    },
+    {
+      "path": "backend/tests/test_stage4_schema.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "8d339c2132f3646079dceb1fd46a5aaf7f870c84e0d281ab04a50bef8f496663"
+    },
+    {
+      "path": "backend/tests/test_stage4_storage.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "c5d7c21539caf7abbb4a4790b1aa0e1cae41d427f835daaa660efb4b77583e3b"
+    },
+    {
+      "path": "backend/tests/test_stage5_carbon.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "private calculation fixtures.",
+      "sha256": "00c02dbb5ac9d631b4623ff63a6d7d9964c44f7465021ebe798d547dcaabd14d"
+    },
+    {
+      "path": "backend/tests/test_stage6_localization.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "e28d3f0d2634805000f2504111bedc118255ba8679f4df1430683b6f32fba1a5"
+    },
+    {
+      "path": "backend/tests/test_worldcover_nonforest_exclusion.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "fb0c729d9b0d261d6708c9e3b404b1cdfc4291836cd92a27c979ce4bd80810ef"
+    },
+    {
+      "path": "docs/architecture.md",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Technical documentation retained or updated to describe the actual sanitized source; private examples and internal coordination language removed.",
+      "sha256": "bca162fda2435c9c3d6793503f5e52213471b76223307994ee2ab8ba16c4c0aa"
+    },
+    {
+      "path": "docs/backblaze-backups.md",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "54adea9aff3cb884b69a58417255d284b2349505cb8180602a97bcdfb5feb368"
+    },
+    {
+      "path": "docs/backup-recovery.md",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "92ace8c2f9a63baa22b3b567d16565bce1651ecdda4785e2c7792cfd8c502f34"
+    },
+    {
+      "path": "docs/data-model.md",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Technical documentation retained or updated to describe the actual sanitized source; private examples and internal coordination language removed.",
+      "sha256": "ae60ff17570e6d50df071b80160f248ebfb39e96be741d4fff2aeccb70bdc4d8"
+    },
+    {
+      "path": "docs/integration-plan.md",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "91bf7b016177b9421790feb742cc42038197bf5431377fae36e1b34289ba7639"
+    },
+    {
+      "path": "docs/ogm-endpoint-research.md",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "20b4d7aaaeb15837e7b4f92e6d20ace919dfe83b49400b8ab889ea466180fbee"
+    },
+    {
+      "path": "docs/stage1-acceptance.md",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "e605b57379dde7be4c55cc06f4c5d596a6f6f35b40be2dc3ad5d3ee7146d2a6c"
+    },
+    {
+      "path": "docs/stage3-acceptance.md",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "46ee4579c2c6bb6003b24ffc44f0e6e8d2a6965760cc0fc188484f48e94e6f71"
+    },
+    {
+      "path": "docs/stage4-acceptance.md",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "71b1e7e3835e0617624e3c7fb66bd1b729229000e9b6995c4551ba0ffc6a86fa"
+    },
+    {
+      "path": "docs/stage4-automation.md",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "ea3c59708c8d0be04a2f0a0ab09833d7a4085485cf1346eacae76e0b896ce903"
+    },
+    {
+      "path": "docs/stage6-handover.md",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Technical documentation retained or updated to describe the actual sanitized source; private examples and internal coordination language removed.",
+      "sha256": "c0b4f7bc67be83d9b36e6fec6469a3667dc1d7f039ecb800f6742214a9c981f6"
+    },
+    {
+      "path": "frontend/.dockerignore",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Source presentation and API boundary retained; map key, operational scope defaults and private observation breakpoints omitted.",
+      "sha256": "67613bcc2ebd612d6f90b8f1e4ecd12de192d2de060355b1cf07929f4b19300d"
+    },
+    {
+      "path": "frontend/Dockerfile",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Source presentation and API boundary retained; map key, operational scope defaults and private observation breakpoints omitted.",
+      "sha256": "a6044c21476b6185920ce59d2538d23875c770d0d20163a12a868a46c42b9b04"
+    },
+    {
+      "path": "frontend/index.html",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Source presentation and API boundary retained; map key, operational scope defaults and private observation breakpoints omitted.",
+      "sha256": "2da20b99289569dee95873288ac2da976032efe400fdedba4bbfb8e99b57dbfb"
+    },
+    {
+      "path": "frontend/package-lock.json",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Source presentation and API boundary retained; map key, operational scope defaults and private observation breakpoints omitted.",
+      "sha256": "c02ba053b0e70c1f95edd65cfc83a74eb3feca5045de47b88623aeea38481b82"
+    },
+    {
+      "path": "frontend/package.json",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Source presentation and API boundary retained; map key, operational scope defaults and private observation breakpoints omitted.",
+      "sha256": "46b5a4481f5f98ff455b2857c594ca49792131bef8f70e0c809dbdf4b37ec127"
+    },
+    {
+      "path": "frontend/public/favicon.svg",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "9ac19e917948dafb438fc3d581e98ffed66a65e28deea8c3f68eba7408d7b935"
+    },
+    {
+      "path": "frontend/public/runtime-config.js",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "fa933539095138ac8289610a61b76dff817f0b84fd54f2dac93b4637e8a4db37"
+    },
+    {
+      "path": "frontend/server.mjs",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Source presentation and API boundary retained; map key, operational scope defaults and private observation breakpoints omitted.",
+      "sha256": "f90aa19ce7f0e1223cba5be3f268b981cc4bb74fffbefcc4a058bc42936928bf"
+    },
+    {
+      "path": "frontend/src/App.jsx",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Source presentation and API boundary retained; map key, operational scope defaults and private observation breakpoints omitted.",
+      "sha256": "af018bd920eefb8e5b3b58afadb5c0fa29b533eb4c3dd22095b99033ea666085"
+    },
+    {
+      "path": "frontend/src/api/stage1.js",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Source presentation and API boundary retained; map key, operational scope defaults and private observation breakpoints omitted.",
+      "sha256": "6f496fb4a058ac1750b1c9067ee184dd30f3fc5af6b9b6d6ac729ad208ed3ea2"
+    },
+    {
+      "path": "frontend/src/api/stage2.js",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "11188b5254d439a41a269ce3a73c0bf7d9071b2b5789809133d1ec1d22e7fc5b"
+    },
+    {
+      "path": "frontend/src/api/stage4.js",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "02796d8514ad9f953760c01c115e738f5687c186fe5c320cd49ea65d198b34d7"
+    },
+    {
+      "path": "frontend/src/api/stage5.js",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "e63c7bae900c9aa850345b0d3fb88c276d6bf96a8e479df987603d7178352741"
+    },
+    {
+      "path": "frontend/src/components/AssetPassport.jsx",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Source presentation and API boundary retained; map key, operational scope defaults and private observation breakpoints omitted.",
+      "sha256": "722735e98d9387ba0a5835e1c2346f445b61898af9ecad8fef6bd2a3e02e8002"
+    },
+    {
+      "path": "frontend/src/components/GlobalView.jsx",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "2ada627948cc9b5357728ec01c3a969019e819f0f7278336b2faf5222a3f2b91"
+    },
+    {
+      "path": "frontend/src/components/MapPanel.jsx",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Source presentation and API boundary retained; map key, operational scope defaults and private observation breakpoints omitted.",
+      "sha256": "d164b1717ce7096dc6a77bfb99a99849bdef101fd46e6f6324a4b0ddf72ab00f"
+    },
+    {
+      "path": "frontend/src/components/Sidebar.jsx",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "805e89a73e1ca66234c24c957649ecc4cec4459af305a7a37d31a3e81898abfd"
+    },
+    {
+      "path": "frontend/src/components/Topbar.jsx",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "9dd58b793ab518aa046e78a79a9af1f24a52e2b299a0b2af6f3f04bd9fc0335d"
+    },
+    {
+      "path": "frontend/src/components/VerificationTable.jsx",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "544fe63cb408fb759864e0937e577bbc542ffd4c54d5174e72eeba274b088523"
+    },
+    {
+      "path": "frontend/src/components/VerificationToolbar.jsx",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "26eef4cb41a6b0544d3d15874ccc9efb74f0eacda293ededd997c64b4cff5523"
+    },
+    {
+      "path": "frontend/src/components/common.jsx",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "8683c2f642c14670548f22243a962ee99012da67c271c144d504d5d95798148c"
+    },
+    {
+      "path": "frontend/src/config/runtime.js",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Source presentation and API boundary retained; map key, operational scope defaults and private observation breakpoints omitted.",
+      "sha256": "c8c85aaa9bf4b19ccb279aae1ceda8a683e7adbdbeb6bc86117c66139d56d0c4"
+    },
+    {
+      "path": "frontend/src/config/scopes.js",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Source presentation and API boundary retained; map key, operational scope defaults and private observation breakpoints omitted.",
+      "sha256": "e2b1f87fe0335c6123ee56fd05ecab1a4ef609a370b3430caf203c979d41736d"
+    },
+    {
+      "path": "frontend/src/hooks/useI18n.js",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "6974f9e1f1b592a4d4736da478720689729152e30f8c51d92c00181c5f4b8240"
+    },
+    {
+      "path": "frontend/src/hooks/usePersistentState.js",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "8eb793eed177529ff3d4be54dc58fff45f4bbbf7babd255e62bad97096a45ff3"
+    },
+    {
+      "path": "frontend/src/hooks/useStage1Data.js",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Source presentation and API boundary retained; map key, operational scope defaults and private observation breakpoints omitted.",
+      "sha256": "49879b3145cb6482cb5c64ed748d18ae27da932ac576696397ea55f4ee12bf6e"
+    },
+    {
+      "path": "frontend/src/hooks/useWorkspaceAvailability.js",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "7c25bf2c2b2473382e6f9c29c8fa36b78eaf6ba4224b4493193e3160d8894d0f"
+    },
+    {
+      "path": "frontend/src/i18n/messages.js",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "48b90ce01be93155eb818cb8077f9c6a2f06599c99e93c4d030f19e5221fbd72"
+    },
+    {
+      "path": "frontend/src/lib/assetAudit.js",
+      "decision": "unchanged",
+      "reason": "Audit-counter presentation helper and neutral counter-contract tests retained from source.",
+      "sha256": "3cc9d7afbfb90781126e8dafe7eb4b4c045cf4d266a213e6d6714670ef5dbd24"
+    },
+    {
+      "path": "frontend/src/lib/formatters.js",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "677f648ab9e1ce65545575e0abb94704c54c3e6964493324534d7e6337fc9340"
+    },
+    {
+      "path": "frontend/src/lib/geojson.js",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "c4dc5b99cb394522140177295bdae1266986fa048100780445ed993956c3b11b"
+    },
+    {
+      "path": "frontend/src/lib/ndviHistory.js",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "eeebae39062a374c56cb480be5278bc7d2822e7961153aaf2450c13b19009bb1"
+    },
+    {
+      "path": "frontend/src/lib/stage4Summary.js",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "bd50575aa5bc8aad9fe50385dc4b9917ab786384524bd809255afbb76fc31300"
+    },
+    {
+      "path": "frontend/src/lib/stage5Summary.js",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "8c68c6bc1c1d02f29c2462c4e5d77425c47c436da90cd4b24aa5007d2ce15951"
+    },
+    {
+      "path": "frontend/src/lib/status.js",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "cf7c0e97beb2fbb6e411466b2ffd89e3fd62d3dd4e499ac72dc36b52b8900609"
+    },
+    {
+      "path": "frontend/src/main.jsx",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "2daa6041f5ca16cf115161c1d379790d578b61979b93ef65a3942822912f3f4e"
+    },
+    {
+      "path": "frontend/src/styles.css",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Source presentation and API boundary retained; map key, operational scope defaults and private observation breakpoints omitted.",
+      "sha256": "1172695947813ea0b9917fb508383ff9ad14fd71e24247fbda55cd21a1d54ecb"
+    },
+    {
+      "path": "frontend/tests/asset-audit.test.mjs",
+      "decision": "unchanged",
+      "reason": "Audit-counter presentation helper and neutral counter-contract tests retained from source.",
+      "sha256": "d7a2cb74c58b292c065ed827c24071ae5ae70a5ffeefa35516de05d63e940849"
+    },
+    {
+      "path": "frontend/tests/click-passport/README.md",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Ordinary tests retained with confidential numeric fixtures or operational identity examples explicitly sanitized.",
+      "sha256": "7a7e7eec1a1acfa9b1d6400782180d0d3f7ac356c8b7ba0c58c2fa762dd78db9"
+    },
+    {
+      "path": "frontend/tests/click-passport/click-passport.spec.js",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "private assessment fixture or dependent test.",
+      "sha256": "5648f7b3d55592fd2b4bdda8714921304ea72830de0f0e380b10d6f0b1f867ae"
+    },
+    {
+      "path": "frontend/tests/click-passport/client-presentation.spec.js",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "private assessment fixture or dependent test.",
+      "sha256": "5648f7b3d55592fd2b4bdda8714921304ea72830de0f0e380b10d6f0b1f867ae"
+    },
+    {
+      "path": "frontend/tests/click-passport/filtered-results.spec.js",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "private assessment fixture or dependent test.",
+      "sha256": "5648f7b3d55592fd2b4bdda8714921304ea72830de0f0e380b10d6f0b1f867ae"
+    },
+    {
+      "path": "frontend/tests/click-passport/fixtures.mjs",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "private assessment fixture or dependent test.",
+      "sha256": "5648f7b3d55592fd2b4bdda8714921304ea72830de0f0e380b10d6f0b1f867ae"
+    },
+    {
+      "path": "frontend/tests/click-passport/overzoom.spec.js",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "private assessment fixture or dependent test.",
+      "sha256": "5648f7b3d55592fd2b4bdda8714921304ea72830de0f0e380b10d6f0b1f867ae"
+    },
+    {
+      "path": "frontend/tests/click-passport/playwright.config.mjs",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "aab3c340eee30d63916d62474ffbe3ca3f2e825f2b3d4233f02e96e105d4b88f"
+    },
+    {
+      "path": "frontend/tests/click-passport/registered-cell.spec.js",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "private assessment fixture or dependent test.",
+      "sha256": "5648f7b3d55592fd2b4bdda8714921304ea72830de0f0e380b10d6f0b1f867ae"
+    },
+    {
+      "path": "frontend/tests/click-passport/sidebar-carbon.test.mjs",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "private assessment fixture or dependent test.",
+      "sha256": "5648f7b3d55592fd2b4bdda8714921304ea72830de0f0e380b10d6f0b1f867ae"
+    },
+    {
+      "path": "frontend/tests/click-passport/vite.config.mjs",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "be5c8e584f22c61b57d697f552756030583ee6efb4cfcb4a3e6fb23e6567907e"
+    },
+    {
+      "path": "frontend/tests/i18n-hook.test.mjs",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "853f231f90586438a981a4e72cceb39a04d16515d8c86b9a127f88465c9e59d1"
+    },
+    {
+      "path": "frontend/tests/i18n-runtime.spec.js",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "7dab897a346a42fc0ae5629189c14d6f81caa611d3daae166191f9bc4220f6ae"
+    },
+    {
+      "path": "frontend/tests/ndvi-history.test.mjs",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "ccbc4c9eed9e0cc82564a78c5970cb3ece40f0591a2de5ae51cb2c09a4b04fad"
+    },
+    {
+      "path": "frontend/tests/stage1-browser.spec.js",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "b7a04c8f7a3c2b6c44dddf6a333f953907a5c471ac90aadb609193e526ff84c9"
+    },
+    {
+      "path": "frontend/tests/stage3-public-preview.spec.js",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "d05beca625036d6d905173eec59684365e7daa8b325e60d643dc0f923cdb98ff"
+    },
+    {
+      "path": "frontend/tests/stage5-summary.test.mjs",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "private assessment fixture or dependent test.",
+      "sha256": "5648f7b3d55592fd2b4bdda8714921304ea72830de0f0e380b10d6f0b1f867ae"
+    },
+    {
+      "path": "frontend/tests/stage6-live.spec.js",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "2af82e8bc7ea4be19836488f877d096fad46640bd5fd3a9a3dba5321f7a94209"
+    },
+    {
+      "path": "frontend/vite.config.js",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Source presentation and API boundary retained; map key, operational scope defaults and private observation breakpoints omitted.",
+      "sha256": "619a8ce6ce5384406181a2e3eef2a5d27a2c412b6037fa3b1bd18e307032faf8"
+    },
+    {
+      "path": "infra/OPERATIONS-GATES.md",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Original infrastructure layout retained; host, account and volume settings use placeholders.",
+      "sha256": "f467f644f0b2ee589fb791eee3dda065a8b959af691ad1896d199d4156a605b6"
+    },
+    {
+      "path": "infra/backblaze-backup-key.example.json",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "0ce1012bafa1388403413ac86a577ca900d74cc0b0dc148303925bb49c8c7a9d"
+    },
+    {
+      "path": "infra/backblaze-backup-lifecycle.example.json",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "32bfe82d236adb3d1aa4ee0a506f7ecbd272f0edb7016d29397b4f2f568d04da"
+    },
+    {
+      "path": "infra/backup-job.env.example",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Original infrastructure layout retained; host, account and volume settings use placeholders.",
+      "sha256": "fe1d9cd483c5f196a4599cebd2de191da1964413eee3fef741c8ebd07924c341"
+    },
+    {
+      "path": "infra/backup.env.example",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Original infrastructure layout retained; host, account and volume settings use placeholders.",
+      "sha256": "7bb1210e8f94fc920bc311a227a30eb5cb2f633d56153051786c8cead321cdac"
+    },
+    {
+      "path": "infra/caddy/Caddyfile",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "fdf2cc7fd478803cc13cda52a45f02f9de4db2149fb07c42dc41937c04161b9d"
+    },
+    {
+      "path": "infra/docker-compose.backup.yml",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "583cdc0191a38a71f9a1747df507118628064fbbed1f54079597e22883317eb4"
+    },
+    {
+      "path": "infra/docker-compose.capacity.yml",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "ce1c2120d418ce71634822ce0f09d0800180a4cbc5c2c139b946a403f3923669"
+    },
+    {
+      "path": "infra/docker-compose.prod.yml",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "96006418ef4bda92dd63861c6731d0421a92d8452d9163e61cd6a59b59747a62"
+    },
+    {
+      "path": "infra/docker-compose.yml",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "1b374de5f60de0a51ba8d9a74f4af55106f17e5efa07567cff536428e61710d4"
+    },
+    {
+      "path": "infra/fail2ban/README.md",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Original infrastructure layout retained; host, account and volume settings use placeholders.",
+      "sha256": "f5c0d1ada744d7298918374f4af93b18c298a489f4eb4457de69016b2aa9c64a"
+    },
+    {
+      "path": "infra/fail2ban/filter.d/map1-caddy-auth.conf",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "2aad8643346d08f8905eb90fce8993e51d798257fb2d0f218b8796cc45878daa"
+    },
+    {
+      "path": "infra/fail2ban/jail.d/map1-caddy-auth.local",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "3cf7b3b79177b9d29b13309fd12ad4632e1eba80535ef8b1abf6f0cbd8553fdd"
+    },
+    {
+      "path": "infra/s3-backup-lifecycle.example.json",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "b04a4c5875731483395c689f6d0869aa64dfce9f6d49b475a09bf37d93251aff"
+    },
+    {
+      "path": "infra/s3-backup-uploader-policy.example.json",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "6e0bc9e2099b095a3a9cc028837b32259ea2a1c96a2caad3e3f5f6b469851dde"
+    },
+    {
+      "path": "infra/systemd/map1-backup-alert@.service",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "f41769243d57c6293b3251b8a9570f36cd495f7fbf7cd070ceb47596a46fe911"
+    },
+    {
+      "path": "infra/systemd/map1-backup-alert@.service.d/20-healthchecks.conf",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "638c49634feeadd3be6bf00e10891db58f404bb5da65cea67c1e798374a4ff61"
+    },
+    {
+      "path": "infra/systemd/map1-offsite-backup-check.service",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "340c36eac3ca64f5d0fbaee1f8fef8c5369454b33bfa79721c63f62a97a2ddc3"
+    },
+    {
+      "path": "infra/systemd/map1-offsite-backup-check.service.d/20-healthchecks.conf",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "1ce55ba37f5e7eed2603ad4d916e6a51d3d1e4cb78eb05a8c026f67491c35af1"
+    },
+    {
+      "path": "infra/systemd/map1-offsite-backup-check.timer",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "a7f4a0de167d383db1265352137bfc0f632f945cc461d424a8d03269782c686b"
+    },
+    {
+      "path": "infra/systemd/map1-offsite-backup.service",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "917862ac109e8e38913e724a5d2e76a6f2be70cefc43b188d7c8b09bf7f03e51"
+    },
+    {
+      "path": "infra/systemd/map1-offsite-backup.service.d/20-healthchecks.conf",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "4664cc1926d518dec3018ca74ba5dd5c7183e97a3feefefd1c49ea99bad290ab"
+    },
+    {
+      "path": "infra/systemd/map1-offsite-backup.timer",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "04d0cc986509c5690788763558d6a530ddd3df5613a643557b550fec25d7f578"
+    },
+    {
+      "path": "infra/systemd/map1-production.service",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Original infrastructure layout retained; host, account and volume settings use placeholders.",
+      "sha256": "e8bb5bab12db548c2b5e4aef70f68f5ffe31fffaeb36dca1740de67e552c8d0a"
+    },
+    {
+      "path": "infra/systemd/map1-turkey-backup.service",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "7873152aa1b44254125cf690443c9cc6a7d9f8e792aa2af893c117b86e83328f"
+    },
+    {
+      "path": "infra/systemd/map1-turkey-backup.timer",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "7535e834e21abed2c2dc3a001ada0d2ea7bac2881ab050e699f0e856a7dd6afa"
+    },
+    {
+      "path": "infra/systemd/map1-workers.slice",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "5e5caf031e374d654e9c26ad04dcbd28a4c8af57e42d6903903a2aed0c70b8be"
+    },
+    {
+      "path": "scripts/backup-db.sh",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "f30dc5a8a2ab4ae5c5710b478ba89f8c183fa08649f651df236d3f4ff1767f8c"
+    },
+    {
+      "path": "scripts/backup-offsite.sh",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "cd0c024590786a8237e79b8d1b54b4d1c3133518c4e7bd009672e73a45225e79"
+    },
+    {
+      "path": "scripts/backup-restore-validation.sql",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "52e337af1cdf42c96782935d97e899effe54e49ab14307c4f886c03e85618faf"
+    },
+    {
+      "path": "scripts/backup_alert.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "6e879c56c5e8652c565ef6b00796465bcfe9d3a812c01ffe375a9033c4e7ce81"
+    },
+    {
+      "path": "scripts/backup_budget.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "ab5bd4e3ee30271fb8119d3457a0f109fc135b49994e80d27dad9ec0506e48d1"
+    },
+    {
+      "path": "scripts/backup_heartbeat.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "78df9f3167a26c2b9a10ca2316f6a5dd360d6a1b9abfddd0866f7ebffedfe5ca"
+    },
+    {
+      "path": "scripts/backup_offsite.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "0c1caef50ea39ec718140d2a5390b5024c4f0d18b45e069b82b46d0a847bd95b"
+    },
+    {
+      "path": "scripts/backup_volume_guard.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "695071ca60798e6bd1d5ba67c722eaffbdf3c19accc7f331c018b91bec951862"
+    },
+    {
+      "path": "scripts/check-backup-restore.sh",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "d5406d8e369858d36149c552e0924f7e7dcd9522bd5a2bbd03cc25ffac5fe0dd"
+    },
+    {
+      "path": "scripts/check-production-storage.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Original operational implementation retained; host/credential/volume examples sanitized.",
+      "sha256": "7703104ee258c8ecb1e6609cd03f0535008c542d873804fd0697cafd2665cfbd"
+    },
+    {
+      "path": "scripts/check-stage1-audit.sh",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "private assessment audit fixtures.",
+      "sha256": "0373c21ab4c874167f0f5a02f7406f444466e089d212175bec81b71f60e3c19f"
+    },
+    {
+      "path": "scripts/check-stage1-browser.sh",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "2b85b4d43dd22420a3d97257e7971b9dc785e87fa09e878f754d7171f6467ed1"
+    },
+    {
+      "path": "scripts/check-stage1-demo.sh",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "private assessment audit fixtures.",
+      "sha256": "0373c21ab4c874167f0f5a02f7406f444466e089d212175bec81b71f60e3c19f"
+    },
+    {
+      "path": "scripts/check-stage1.sh",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "7abc731e8a1a81a6b61c7485e4b48fbf15623403e49aa64240726952bd52e8ec"
+    },
+    {
+      "path": "scripts/check-stage3-public-preview.sh",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "991cba5c51ef9f5c5d9778d284df32456c5af8f8b8179d89efcf3a74d1b38a2e"
+    },
+    {
+      "path": "scripts/check-stage4-automation.sh",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "f8d3306ea8e6094a864dffdc700c43566494fefeff627a307deda1abc74427b5"
+    },
+    {
+      "path": "scripts/check-stage4-public-proof.sh",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "426da40dd0ded2e32fe5099a4997da4da6877ba9b855942a8a3dd1b819188a80"
+    },
+    {
+      "path": "scripts/check-stage4-public-scaling.sh",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "690b11d1ffffb4fede3f62e52d016eb2bba88170929ae31e1c1c113c79d920ee"
+    },
+    {
+      "path": "scripts/check-stage6-live.sh",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "ad501cda5f235fbeeb64775f7729c300a6d72b3b699dfafa6c97d106bb39ae07"
+    },
+    {
+      "path": "scripts/check-tracked-secrets.sh",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "73ddf5da517b9d3eb4e278e7a37e2e642ad9fdc06096372e1f347491a4b6c7e0"
+    },
+    {
+      "path": "scripts/configure-db-runtime-role.sh",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "70512e295bd568a7cd2160e2d07d847cc69168645eee4f1122925d7ba41a87cf"
+    },
+    {
+      "path": "scripts/filter-secret-scan-candidates.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Original operational implementation retained; host/credential/volume examples sanitized.",
+      "sha256": "35922458b7f1b5aabba075b3b3e4a62768a558dc022fbafd1260f5402677fd7a"
+    },
+    {
+      "path": "scripts/prepare-stage4-public-raster-zonal-inputs.sh",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "0f120b5081c87d63f17a328fbf979153c9a4142c86b04fd23cc7a8e8f57241a9"
+    },
+    {
+      "path": "scripts/run-production-services.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Original operational implementation retained; host/credential/volume examples sanitized.",
+      "sha256": "19f8edbe2fc80b6f1ed427956c2107150ab3cb85cb848a6e2bdba967ca48b2be"
+    },
+    {
+      "path": "scripts/run-stage3-tool-host-network.sh",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "bd83b96f72b887595a719a3e19f5587fcfa1a26039470276ee9858d4850bc710"
+    },
+    {
+      "path": "scripts/stage3_v9_formula_equivalence_gate_fast.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "fa9641481da04bb9581cf2dd622a725f47c520220b5e1881fc0a4583dc32afe4"
+    },
+    {
+      "path": "scripts/stage3_v9_fragment_equivalence_gate.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "7c61de26e1b68d0f7ba9ca85f5356de9f366047b05b3403fd6e5ab9f149e280e"
+    },
+    {
+      "path": "scripts/stage3_v9_grid_watchdog.sh",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "050072ede1f2687ab78106eeace446c709e67cc6ef7366b627329520421a4f1e"
+    },
+    {
+      "path": "scripts/stage3_v9_logical_grid_gate.sql",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "2be158ee1bd9f15c4e2bf30bf5ea475c50eeebc95cfa82cd425ce7bb2b6df0a4"
+    },
+    {
+      "path": "scripts/stage3_v9_orchestrator.sh",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "3fce5f03e335165e26368d0dd126cd410dafe881468364ced98ed47ac0dd5390"
+    },
+    {
+      "path": "scripts/stage3_v9_stored_grid_strict_gate.sql",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "683d682702f8fc5dbacd7560370b402816396559acf429c2892f0a3b2a94df02"
+    },
+    {
+      "path": "scripts/stage3_v9_uuid_grid_gate.sql",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "b3353a9a4f2a8d5c3420397e8d043d089620d8bd225e79cef044b147d285fdca"
+    },
+    {
+      "path": "scripts/stage3_v9b_fast_forest_clip_gate.sql",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "b6a7e86c24f80f496744c36161369460a5951c35c26a089877e933fb46ef8287"
+    },
+    {
+      "path": "scripts/stage3_v9b_grid_watchdog.sh",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "7fd3fab757c78f8aaa20f038062316b3a0a71de75ea2cbf8425871780e0ca798"
+    },
+    {
+      "path": "scripts/stage3_v9b_hash_fix.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "b96ba7c203670ca0bbd2d1c868e0baeed750b43b646dd1d8a236073e2b6be6fd"
+    },
+    {
+      "path": "scripts/tests/requirements.txt",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "64c1b1a45eaba6ac6b28cef2b512433c5169410c4b3d5c9268506665ac64416a"
+    },
+    {
+      "path": "scripts/tests/test_backup_alert.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Ordinary tests retained with confidential numeric fixtures or operational identity examples explicitly sanitized.",
+      "sha256": "7a2c23e1b2fdb9ef6a2555092a549805f52045163d6fe18899f42808b2dbc3c3"
+    },
+    {
+      "path": "scripts/tests/test_backup_budget.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "b10aab05626c97978746fe8a2b3691eae18288841c63b2c7bf19f6c09f9bd38c"
+    },
+    {
+      "path": "scripts/tests/test_backup_download_budget.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "f912ea006ff41e81315a3f025fbe3347dd9f8cfe3ded552d891c4807fb8d1853"
+    },
+    {
+      "path": "scripts/tests/test_backup_heartbeat.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "129b8416599054b4e3d09463ebaa631cd9f20c5375c51c840bb7eccea2d6990f"
+    },
+    {
+      "path": "scripts/tests/test_backup_offsite.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "9269e66b3282f5b4441d60230d83f734c8d10c845268246f221729980ce18c19"
+    },
+    {
+      "path": "scripts/tests/test_backup_offsite_job.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "d8e55940d72060c1e1752c4df3e8d8feed61482f25dc827a2b9d37e7ece69a9f"
+    },
+    {
+      "path": "scripts/tests/test_backup_recovery_identity.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "4879efe478127896e4ad0dd48c635bd28f1d35f9c18a43216094a2c8b73dc0e8"
+    },
+    {
+      "path": "scripts/tests/test_backup_retention.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "19f7a489897416fa30e6aadeda1d637709ac70b10b9aa48e790e765947c0449d"
+    },
+    {
+      "path": "scripts/tests/test_backup_scripts.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "a27056b7188516fd52a8d98ebe700c18249b7b29847f1c6b738a393c18e8afaa"
+    },
+    {
+      "path": "scripts/tests/test_backup_volume_guard.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "8064b6133edbe6341a43684073f12b1b1e39e690dc7084fb48d2f5a7e910843a"
+    },
+    {
+      "path": "scripts/tests/test_production_storage.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Ordinary tests retained with confidential numeric fixtures or operational identity examples explicitly sanitized.",
+      "sha256": "1e772d5b9472f24bf98da53c53f1a34be26ed7caf630ca1f81562444f7e8a2f7"
+    },
+    {
+      "path": "scripts/tests/test_production_supervisor.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Ordinary tests retained with confidential numeric fixtures or operational identity examples explicitly sanitized.",
+      "sha256": "db2d484dbf5471a07c3ad9215d129885a38d23a9d13b1149610f16e0b79d2d64"
+    },
+    {
+      "path": "scripts/tests/test_secret_scan.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "1f45a4b5a15a04cfbed5c9e5708000d678623a99b6f525204000b5830fc16763"
+    },
+    {
+      "path": "scripts/tests/test_stage3_fragment_source_cache_gate.py",
+      "decision": "unchanged",
+      "reason": "Original non-calculation source retained unchanged.",
+      "sha256": "09fe202fc83af79d9829d1c4e61029ea12f50b5c447437d56a08976c61ad3dfb"
+    },
+    {
+      "path": "scripts/tests/test_stage3_host_network.py",
+      "decision": "sanitized_or_explicit_private_boundary",
+      "reason": "Ordinary tests retained with confidential numeric fixtures or operational identity examples explicitly sanitized.",
+      "sha256": "0677127827f3ac3373942a0833c2ce88cf0ab9e35d5ddb1fc1ed3795012ddb0e"
+    }
+  ],
+  "private_function_redactions": [
+    {
+      "file": "backend/app/api/stage2.py",
+      "function": "_carbon_api_params",
+      "change": "public read configuration"
+    },
+    {
+      "file": "backend/app/api/stage2.py",
+      "function": "_stage5_year_over_year_fallback_sql",
+      "change": "stored-output projection"
+    },
+    {
+      "file": "backend/app/api/stage2.py",
+      "function": "_stage5_assessment_year_sql",
+      "change": "stored-output projection"
+    },
+    {
+      "file": "backend/app/api/stage2.py",
+      "function": "_stage5_gross_increment_sql",
+      "change": "stored-output projection"
+    },
+    {
+      "file": "backend/app/api/stage2.py",
+      "function": "_stage5_biomass_increment_sql",
+      "change": "stored-output projection"
+    },
+    {
+      "file": "backend/app/api/stage2.py",
+      "function": "_stage5_soil_increment_sql",
+      "change": "stored-output projection"
+    },
+    {
+      "file": "backend/app/api/stage2.py",
+      "function": "_stage5_loss_factor_sql",
+      "change": "stored-output projection"
+    },
+    {
+      "file": "backend/app/api/stage2.py",
+      "function": "_stage5_net_annual_increment_ha_sql",
+      "change": "stored-output projection"
+    },
+    {
+      "file": "backend/app/api/stage2.py",
+      "function": "_stage5_area_coefficient_sql",
+      "change": "stored-output projection"
+    },
+    {
+      "file": "backend/app/api/stage2.py",
+      "function": "_stage5_net_annual_increment_asset_sql",
+      "change": "stored-output projection"
+    },
+    {
+      "file": "backend/app/api/stage5.py",
+      "function": "_stage5_export_assessment_year_sql",
+      "change": "stored-output projection"
+    },
+    {
+      "file": "backend/app/api/stage5.py",
+      "function": "_stage5_export_gross_increment_sql",
+      "change": "stored-output projection"
+    },
+    {
+      "file": "backend/app/api/stage5.py",
+      "function": "_stage5_export_loss_factor_sql",
+      "change": "stored-output projection"
+    },
+    {
+      "file": "backend/app/api/stage5.py",
+      "function": "_stage5_export_net_increment_ha_sql",
+      "change": "stored-output projection"
+    },
+    {
+      "file": "backend/app/api/stage5.py",
+      "function": "_stage5_export_area_coefficient_sql",
+      "change": "stored-output projection"
+    },
+    {
+      "file": "backend/app/api/stage5.py",
+      "function": "_stage5_export_net_increment_asset_sql",
+      "change": "stored-output projection"
+    },
+    {
+      "file": "backend/app/api/stage5.py",
+      "function": "_require_stage5_rules_write_token",
+      "change": "private boundary"
+    },
+    {
+      "file": "backend/app/api/stage5.py",
+      "function": "stage5_status",
+      "change": "public read configuration"
+    },
+    {
+      "file": "backend/app/api/stage5.py",
+      "function": "stage5_rules",
+      "change": "private boundary"
+    },
+    {
+      "file": "backend/app/api/stage5.py",
+      "function": "validate_stage5_rules",
+      "change": "private boundary"
+    },
+    {
+      "file": "backend/app/api/stage5.py",
+      "function": "save_stage5_rules",
+      "change": "private boundary"
+    },
+    {
+      "file": "backend/app/api/stage5.py",
+      "function": "reset_stage5_rules",
+      "change": "private boundary"
+    },
+    {
+      "file": "backend/app/api/stage5.py",
+      "function": "stage5_rules_history",
+      "change": "private boundary"
+    }
+  ],
+  "ordinary_routes_implemented": 31,
+  "database_backed_read_routes": 28,
+  "private_rules_configuration_routes_501": 5,
+  "migration_chain": {
+    "revisions": 47,
+    "original_source_unchanged": true,
+    "heads": 1
+  },
+  "intentional_non_source_exclusions": {
+    "original_git_directory": "Original repository history is not distributed.",
+    "recovery": "Private operational recovery history and server-state records are not source architecture.",
+    "dependency_and_build_trees": "Not source deliverables; local generated artifacts are excluded.",
+    "methodology_binaries": "No PDF or other binary methodology/formula documents are copied."
+  },
+  "publication": "Publication follows client acceptance."
+}

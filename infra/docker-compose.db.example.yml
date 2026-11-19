@@ -1,0 +1,13 @@
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:?Set a local database user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set a local database password}
+      POSTGRES_DB: ${POSTGRES_DB:?Set a local database name}
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - review_db:/var/lib/postgresql/data
+volumes:
+  review_db:

@@ -1,0 +1,112 @@
+{
+  "status": "ready_for_architecture_review",
+  "source_coverage": {
+    "original_paths": 329,
+    "original_directories": 35,
+    "unaccounted_paths": 0
+  },
+  "executed_checks": {
+    "core_contract_tests": {
+      "passed": 9
+    },
+    "frontend_guard_tests": {
+      "passed": 7
+    },
+    "storage_safety_tests": {
+      "passed": 8
+    },
+    "frontend_production_build": "passed",
+    "openapi_runtime_snapshot": "passed",
+    "migration_graph": {
+      "revisions": 47,
+      "heads": 1,
+      "source_byte_identical": true
+    },
+    "compose_syntax": {
+      "original_configs_validated": 4,
+      "containers_started": false
+    },
+    "shell_syntax": {
+      "files": 19,
+      "errors": 0
+    },
+    "internal_python_import_modules": {
+      "missing": 0
+    },
+    "isolated_actual_http": {
+      "status": "pass",
+      "checks": [
+        {
+          "path": "/health",
+          "http": 200
+        },
+        {
+          "path": "/meta/localization",
+          "http": 200
+        },
+        {
+          "path": "/stage1/source-strategy",
+          "http": 200
+        },
+        {
+          "path": "/stage1/regions",
+          "http": 503
+        },
+        {
+          "path": "/stage2/assets",
+          "http": 503
+        },
+        {
+          "path": "/stage5/rules",
+          "http": 501
+        }
+      ],
+      "real_http_server": true,
+      "database_scope": "Deliberately unconfigured isolated database port; database absence is not an empty populated schema.",
+      "production_contacted": false,
+      "owned_process_closed": true
+    },
+    "whole_source_scan": {
+      "files": 375,
+      "findings": [],
+      "operational_host_basenames": "sanitized",
+      "real_hardware_volume_identifiers": "sanitized",
+      "sensitive_ip_credentials_map_keys": "no findings",
+      "private_numeric_assessment_fixture_candidates": "none"
+    },
+    "generated_bundle_scan": "passed",
+    "source_scanner_regressions": {
+      "passed": 8,
+      "scope": "Clone metadata, tracked source secrets, force-tracked ignored artifacts, untracked source, external symlinks, source archives, stale hashes and self-reference."
+    },
+    "operational_script_tests": {
+      "passed": 254,
+      "scope": "Complete scripts/tests suite with declared test dependencies and backend import path."
+    },
+    "npm_dependency_audit": {
+      "known_vulnerabilities": 0,
+      "scope": "Current lockfile; compatible patched dependency versions installed and built."
+    },
+    "python_pinned_direct_dependency_audit": {
+      "known_vulnerabilities": 0,
+      "declared_requirements_audited": 14,
+      "scope": "Pinned direct requirements without dependency resolution; full resolver audit remains a CI job."
+    },
+    "source_and_artifact_scope": "New frontend source and neutral audit-counter tests only; no production dist, runtime credentials or private model fixtures copied."
+  },
+  "integration_limits": [
+    "The full legacy backend model suite, hosted CI image builds and resolver-based dependency audit are not claimed by the local architecture checks.",
+    "No full PostGIS migration/application or populated-data qualification was performed.",
+    "The real isolated HTTP check used an unavailable database port, not a populated or empty initialized schema.",
+    "Source scanning and targeted review are not formal absence proofs."
+  ],
+  "distribution_excludes": [
+    "node_modules",
+    ".local-checks",
+    "dist",
+    ".venv",
+    "original Git history",
+    "operational recovery records"
+  ],
+  "publication": "Publication follows client acceptance."
+}

@@ -1,0 +1,16 @@
+[Unit]
+Description=Verify Map 1 external backup freshness
+After=docker.service network-online.target
+OnFailure=map1-backup-alert@%n.service
+
+[Service]
+Type=oneshot
+User=map1deploy
+Group=map1deploy
+WorkingDirectory=/srv/map1/app
+Environment=BACKUP_BUNDLE_DIR=/srv/map1/backups
+Environment=BACKUP_RESTORE_DIR=/srv/map1/backups/restore
+EnvironmentFile=/srv/map1/secrets/backup-job.env
+ExecStart=/usr/bin/docker compose --project-name map1-backup --env-file /srv/map1/app/runtime.env -f infra/docker-compose.backup.yml run --rm --no-deps backup-transfer check --max-age-hours 30
+UMask=0077
+TimeoutStartSec=15m

@@ -1,0 +1,30 @@
+{
+  "evidence": [
+    "all",
+    "ok",
+    "watch",
+    "anomaly",
+    "insufficient_data",
+    "unverified"
+  ],
+  "signal": [
+    "all",
+    "ok",
+    "no_ndvi",
+    "no_valid_pixels",
+    "request_failed",
+    "unknown"
+  ],
+  "carbon": [
+    "all",
+    "awaiting_coefficients",
+    "pending_coefficients",
+    "pending_inputs",
+    "baseline_estimate",
+    "draft_estimate",
+    "calculated",
+    "skipped_missing_evidence",
+    "failed"
+  ],
+  "note": "Wire values are API identifiers, not presentation labels or published calculation rules. No configuration values or coefficient payloads are included."
+}

@@ -1,0 +1,9 @@
+{
+  "status": "all_original_source_paths_accounted_for",
+  "original_files": 329,
+  "original_directories": 35,
+  "missing_files": [],
+  "migration_revisions_unchanged": 47,
+  "source_of_truth": "scope-projection.json",
+  "publication": "Publication follows client acceptance."
+}

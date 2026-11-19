@@ -1,0 +1,9 @@
+:8080 {
+    bind localhost
+    handle_path /api/* {
+        reverse_proxy localhost:8000
+    }
+    handle {
+        reverse_proxy localhost:5173
+    }
+}

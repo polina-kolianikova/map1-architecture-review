@@ -1,0 +1,536 @@
+services:
+  db:
+    image: postgis/postgis:16-3.4@sha256:44126d872ac91993766c341e369c539e8196614321765d36a6f1bab0419a5fa5
+    restart: unless-stopped
+    shm_size: ${POSTGRES_SHM_SIZE:-1g}
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-map1_turkey}
+      POSTGRES_USER: ${POSTGRES_USER:-map1}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+    ports:
+      - "127.0.0.1:${POSTGRES_HOST_PORT:-5433}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ${POSTGRES_STAGE4_TABLESPACE_HOST_DIR:-../test-results/postgres-stage4-tablespace}:/var/lib/postgresql/stage4_tablespace
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-map1} -d ${POSTGRES_DB:-map1_turkey}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7.4-alpine@sha256:e7723ff73d963f5cc6d9c4643ea3d989527a402a319239054e9472a7fb9219a2
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    image: infra-backend
+    build:
+      context: ../backend
+    working_dir: /app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers ${BACKEND_WORKERS:-2}
+    environment:
+      APP_ENV: production
+      APP_SECRET_KEY: ${APP_SECRET_KEY:-}
+      APP_DEFAULT_LOCALE: ${APP_DEFAULT_LOCALE:-en}
+      APP_SUPPORTED_LOCALES: ${APP_SUPPORTED_LOCALES:-en}
+      BACKEND_BASIC_AUTH_USER: ${BACKEND_BASIC_AUTH_USER:-}
+      BACKEND_BASIC_AUTH_PASSWORD: ${BACKEND_BASIC_AUTH_PASSWORD:-}
+      TRUST_LOCAL_REVERSE_PROXY_ONLY: ${TRUST_LOCAL_REVERSE_PROXY_ONLY:-true}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:?CORS_ALLOWED_ORIGINS is required}
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: ${POSTGRES_DB:-map1_turkey}
+      POSTGRES_USER: ${POSTGRES_READ_USER:?POSTGRES_READ_USER is required}
+      POSTGRES_PASSWORD: ${POSTGRES_READ_PASSWORD:?POSTGRES_READ_PASSWORD is required}
+      POSTGRES_APP_USER: ${POSTGRES_APP_USER:?POSTGRES_APP_USER is required}
+      POSTGRES_APP_PASSWORD: ${POSTGRES_APP_PASSWORD:?POSTGRES_APP_PASSWORD is required}
+      STAGE5_RULES_WRITE_TOKEN: ${STAGE5_RULES_WRITE_TOKEN:-}
+      CDSE_CLIENT_ID: ""
+      CDSE_CLIENT_SECRET: ""
+      CDSE_USERNAME: ""
+      CDSE_PASSWORD: ""
+      CDSE_AUTH_GRANT_TYPE: auto
+      CDSE_TOTP: ""
+      CDSE_PROXY_URL: ""
+      SENTINEL_HUB_STATISTICS_URL: ${SENTINEL_HUB_STATISTICS_URL:-https://sh.dataspace.copernicus.eu/api/v1/statistics}
+      SENTINEL_HUB_BATCH_STATISTICS_URL: ${SENTINEL_HUB_BATCH_STATISTICS_URL:-https://sh.dataspace.copernicus.eu/api/v1/statistics/batch}
+      SENTINEL_HUB_PROCESS_URL: ${SENTINEL_HUB_PROCESS_URL:-https://sh.dataspace.copernicus.eu/api/v1/process}
+      OGM_BASE_URL: ${OGM_BASE_URL:-https://www.ogm.gov.tr}
+      OGM_EHARITA_URL: ${OGM_EHARITA_URL:-https://www.ogm.gov.tr/tr/ormanlarimiz/e-harita}
+      OGM_PORTAL_URL: ${OGM_PORTAL_URL:-https://cbsportal.ogm.gov.tr/ogmportal}
+      OGM_WEBMAP_ITEM_ID: ${OGM_WEBMAP_ITEM_ID:-1d210d5cd6cd42ecb7431e28995a0bc8}
+      OGM_ARAZI_ORTUSU_WMS_URL: ${OGM_ARAZI_ORTUSU_WMS_URL:-https://wsapi.ogm.gov.tr/apigateway/ARAZI_ORTUSU_WMS}
+      OGM_MESCERE_WMS_URL: ${OGM_MESCERE_WMS_URL:-https://wsapi.ogm.gov.tr/apigateway/YAYIN_MESCERE_WMS}
+      OGM_SEFLIK_WMS_URL: ${OGM_SEFLIK_WMS_URL:-https://wsapi.ogm.gov.tr/apigateway/YAYIN_SEFLIK_WMS}
+      OGM_ISLETME_WMS_URL: ${OGM_ISLETME_WMS_URL:-https://wsapi.ogm.gov.tr/apigateway/YAYIN_ISLETME_WMS}
+      OGM_BOLGE_WMS_URL: ${OGM_BOLGE_WMS_URL:-https://wsapi.ogm.gov.tr/apigateway/INT_BOLGE_WMS}
+      OGM_INDEKS_WMS_URL: ${OGM_INDEKS_WMS_URL:-https://wsapi.ogm.gov.tr/apigateway/YAYIN_INDEKS_WMS}
+      OGM_BOLME_FEATURE_URL: ${OGM_BOLME_FEATURE_URL:-https://wsapi.ogm.gov.tr/apigateway/ESATIS_BOLME/0}
+      OGM_TLS_VERIFY: ${OGM_TLS_VERIFY:-true}
+      OGM_PROXY_URL: ${OGM_PROXY_URL:-}
+      TUCBS_ORMAN_WMS_URL: ${TUCBS_ORMAN_WMS_URL:-https://tucbs-public-api.csb.gov.tr/ormansu_orman}
+      ACTIVE_REGION_CODE: ${ACTIVE_REGION_CODE:-TR-STAGE1-TEST}
+      ACTIVE_GRID_VERSION: ${ACTIVE_GRID_VERSION:-stage1-test-v1}
+      STAGE1_VERIFICATION_SOURCE_LAYERS: ${STAGE1_VERIFICATION_SOURCE_LAYERS:-ogm_esatis_bolme,osm_forest_mask}
+      STAGE3_PARTITIONED_EVIDENCE_READS: ${STAGE3_PARTITIONED_EVIDENCE_READS:-true}
+      STAGE1_LAYER_A_SOURCE_LAYERS: ${STAGE1_LAYER_A_SOURCE_LAYERS:-ogm_esatis_bolme,ogm_yayin_mescere_wms_svg}
+      STAGE3_FOREST_MASK_SOURCE_LAYERS: ${STAGE3_FOREST_MASK_SOURCE_LAYERS:-ogm_esatis_bolme,ogm_yayin_mescere_wms_svg}
+      STAGE3_V10_PARTITIONED_GRID_READS: ${STAGE3_V10_PARTITIONED_GRID_READS:-true}
+      STAGE4_QUEUE_URL: ${STAGE4_QUEUE_URL:-redis://redis:6379/0}
+      STAGE4_RESULT_BACKEND_URL: ${STAGE4_RESULT_BACKEND_URL:-redis://redis:6379/1}
+      STAGE4_REGION_CODE: ${STAGE4_REGION_CODE:-TR-STAGE3-PUBLIC-OGM-OSM-UNION-FOREST-V10}
+      STAGE4_GRID_VERSION: ${STAGE4_GRID_VERSION:-stage3-public-ogm-osm-union-clean-v10}
+      STAGE4_SCHEDULER_ENABLED: ${STAGE4_SCHEDULER_ENABLED:-false}
+      STAGE4_UPDATE_CADENCE_DAYS: ${STAGE4_UPDATE_CADENCE_DAYS:-10}
+      STAGE4_BATCH_SIZE: ${STAGE4_BATCH_SIZE:-500000}
+      STAGE4_PROCESSING_PATH: ${STAGE4_PROCESSING_PATH:-public}
+      STAGE4_PROVIDER_ADAPTER: ${STAGE4_PROVIDER_ADAPTER:-public_raster_zonal}
+      STAGE4_NDVI_PROCESSING_MODE: ${STAGE4_NDVI_PROCESSING_MODE:-public_raster_zonal}
+      STAGE4_PUBLIC_PROOF_MAX_CELLS: ${STAGE4_PUBLIC_PROOF_MAX_CELLS:-10}
+      STAGE4_PUBLIC_STATISTICS_MAX_CELLS_PER_BATCH: ${STAGE4_PUBLIC_STATISTICS_MAX_CELLS_PER_BATCH:-10}
+      STAGE4_PUBLIC_STATISTICS_MAX_CELLS_PER_RUN: ${STAGE4_PUBLIC_STATISTICS_MAX_CELLS_PER_RUN:-50}
+      STAGE4_PUBLIC_STATISTICS_ALLOW_FULL_SCOPE: ${STAGE4_PUBLIC_STATISTICS_ALLOW_FULL_SCOPE:-false}
+      STAGE4_PUBLIC_STATISTICS_HARD_CEILING_CELLS: ${STAGE4_PUBLIC_STATISTICS_HARD_CEILING_CELLS:-100000}
+      STAGE4_PUBLIC_RASTER_ZONAL_MAX_CELLS_PER_BATCH: ${STAGE4_PUBLIC_RASTER_ZONAL_MAX_CELLS_PER_BATCH:-50000}
+      STAGE4_PUBLIC_RASTER_ZONAL_RESOLUTION_M: ${STAGE4_PUBLIC_RASTER_ZONAL_RESOLUTION_M:-10}
+      STAGE4_PUBLIC_RASTER_ZONAL_SOURCE_TILE_SIZE_M: ${STAGE4_PUBLIC_RASTER_ZONAL_SOURCE_TILE_SIZE_M:-50000}
+      STAGE4_PUBLIC_RASTER_ZONAL_MAX_PIXELS: ${STAGE4_PUBLIC_RASTER_ZONAL_MAX_PIXELS:-25000000}
+      STAGE4_PUBLIC_RASTER_ZONAL_MIN_FREE_GB: ${STAGE4_PUBLIC_RASTER_ZONAL_MIN_FREE_GB:-5}
+      STAGE4_PUBLIC_RASTER_ZONAL_REUSE_EXISTING_CSV: ${STAGE4_PUBLIC_RASTER_ZONAL_REUSE_EXISTING_CSV:-false}
+      STAGE4_PUBLIC_RASTER_ZONAL_PARTITIONED_MIRROR_ENABLED: ${STAGE4_PUBLIC_RASTER_ZONAL_PARTITIONED_MIRROR_ENABLED:-true}
+      STAGE4_PUBLIC_RASTER_ZONAL_RESULTS_DIR: ${STAGE4_PUBLIC_RASTER_ZONAL_RESULTS_DIR:-/app/artifacts/stage4/public-raster-zonal}
+      STAGE4_PUBLIC_SOURCE_ADAPTER: ${STAGE4_PUBLIC_SOURCE_ADAPTER:-public_stac_cog}
+      STAGE4_PUBLIC_RASTER_CACHE_ENABLED: ${STAGE4_PUBLIC_RASTER_CACHE_ENABLED:-true}
+      STAGE4_PUBLIC_RASTER_CACHE_DIR: ${STAGE4_PUBLIC_RASTER_CACHE_DIR:-/app/artifacts/stage4/public-raster-cache}
+      STAGE4_PUBLIC_STAC_API_URL: ${STAGE4_PUBLIC_STAC_API_URL:-https://earth-search.aws.element84.com/v1/search}
+      STAGE4_PUBLIC_STAC_COLLECTION: ${STAGE4_PUBLIC_STAC_COLLECTION:-sentinel-2-c1-l2a}
+      STAGE4_PUBLIC_STAC_SCENE_LIMIT: ${STAGE4_PUBLIC_STAC_SCENE_LIMIT:-24}
+      STAGE4_BATCH_STATISTICAL_INPUT_URI: ${STAGE4_BATCH_STATISTICAL_INPUT_URI:-}
+      STAGE4_BATCH_STATISTICAL_OUTPUT_URI: ${STAGE4_BATCH_STATISTICAL_OUTPUT_URI:-}
+      STAGE4_BATCH_STATISTICAL_S3_IAM_ROLE_ARN: ""
+      STAGE4_BATCH_STATISTICAL_S3_ACCESS_KEY: ""
+      STAGE4_BATCH_STATISTICAL_S3_SECRET_ACCESS_KEY: ""
+      STAGE4_BATCH_STATISTICAL_S3_REGION: ${STAGE4_BATCH_STATISTICAL_S3_REGION:-WAW3-1}
+      STAGE4_BATCH_STATISTICAL_S3_ENDPOINT_URL: ""
+      STAGE4_BATCH_STATISTICAL_MAX_FEATURES: ${STAGE4_BATCH_STATISTICAL_MAX_FEATURES:-700000}
+      STAGE4_WORK_DIR: ${STAGE4_WORK_DIR:-/app/artifacts/stage4/work}
+      STAGE4_CELL_STATISTICS_MAX_CELLS: ${STAGE4_CELL_STATISTICS_MAX_CELLS:-100000}
+      STAGE4_HISTORY_STORAGE_URI: ${STAGE4_HISTORY_STORAGE_URI:-}
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ../test-results:/app/artifacts
+      - ${STAGE4_PUBLIC_RASTER_CACHE_HOST_DIR:-../test-results/stage4/public-raster-cache}:/app/artifacts/stage4/public-raster-cache
+      - ${STAGE4_PUBLIC_RASTER_ZONAL_RESULTS_HOST_DIR:-../test-results/stage4/public-raster-zonal}:/app/artifacts/stage4/public-raster-zonal
+      - ${STAGE4_WORK_HOST_DIR:-../test-results/stage4/work}:/app/artifacts/stage4/work
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:8000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  stage4-worker:
+    image: infra-backend
+    build:
+      context: ../backend
+    working_dir: /app
+    command: celery -A app.worker.celery_app worker --loglevel=info --queues=stage4 --concurrency=${STAGE4_WORKER_CONCURRENCY:-1}
+    environment:
+      APP_ENV: production
+      TRUST_LOCAL_REVERSE_PROXY_ONLY: true
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: ${POSTGRES_DB:-map1_turkey}
+      POSTGRES_USER: ${POSTGRES_APP_USER:?POSTGRES_APP_USER is required}
+      POSTGRES_PASSWORD: ${POSTGRES_APP_PASSWORD:?POSTGRES_APP_PASSWORD is required}
+      POSTGRES_APP_USER: ${POSTGRES_APP_USER:?POSTGRES_APP_USER is required}
+      POSTGRES_APP_PASSWORD: ${POSTGRES_APP_PASSWORD:?POSTGRES_APP_PASSWORD is required}
+      POSTGRES_READ_USER: ${POSTGRES_READ_USER:?POSTGRES_READ_USER is required}
+      CDSE_CLIENT_ID: ""
+      CDSE_CLIENT_SECRET: ""
+      CDSE_USERNAME: ""
+      CDSE_PASSWORD: ""
+      CDSE_AUTH_GRANT_TYPE: auto
+      CDSE_TOTP: ""
+      CDSE_PROXY_URL: ""
+      SENTINEL_HUB_STATISTICS_URL: ${SENTINEL_HUB_STATISTICS_URL:-https://sh.dataspace.copernicus.eu/api/v1/statistics}
+      SENTINEL_HUB_BATCH_STATISTICS_URL: ${SENTINEL_HUB_BATCH_STATISTICS_URL:-https://sh.dataspace.copernicus.eu/api/v1/statistics/batch}
+      SENTINEL_HUB_PROCESS_URL: ${SENTINEL_HUB_PROCESS_URL:-https://sh.dataspace.copernicus.eu/api/v1/process}
+      ACTIVE_REGION_CODE: ${ACTIVE_REGION_CODE:-TR-STAGE1-TEST}
+      ACTIVE_GRID_VERSION: ${ACTIVE_GRID_VERSION:-stage1-test-v1}
+      STAGE1_VERIFICATION_SOURCE_LAYERS: ${STAGE1_VERIFICATION_SOURCE_LAYERS:-ogm_esatis_bolme,osm_forest_mask}
+      STAGE3_PARTITIONED_EVIDENCE_READS: ${STAGE3_PARTITIONED_EVIDENCE_READS:-true}
+      STAGE4_REGION_CODE: ${STAGE4_REGION_CODE:-TR-STAGE3-PUBLIC-OGM-OSM-UNION-FOREST-V10}
+      STAGE4_GRID_VERSION: ${STAGE4_GRID_VERSION:-stage3-public-ogm-osm-union-clean-v10}
+      STAGE4_QUEUE_URL: ${STAGE4_QUEUE_URL:-redis://redis:6379/0}
+      STAGE4_RESULT_BACKEND_URL: ${STAGE4_RESULT_BACKEND_URL:-redis://redis:6379/1}
+      STAGE4_SCHEDULER_ENABLED: ${STAGE4_SCHEDULER_ENABLED:-false}
+      STAGE4_UPDATE_CADENCE_DAYS: ${STAGE4_UPDATE_CADENCE_DAYS:-10}
+      STAGE4_BATCH_SIZE: ${STAGE4_BATCH_SIZE:-500000}
+      STAGE4_PROCESSING_PATH: ${STAGE4_PROCESSING_PATH:-public}
+      STAGE4_PROVIDER_ADAPTER: ${STAGE4_PROVIDER_ADAPTER:-public_raster_zonal}
+      STAGE4_NDVI_PROCESSING_MODE: ${STAGE4_NDVI_PROCESSING_MODE:-public_raster_zonal}
+      STAGE4_PUBLIC_PROOF_MAX_CELLS: ${STAGE4_PUBLIC_PROOF_MAX_CELLS:-10}
+      STAGE4_PUBLIC_STATISTICS_MAX_CELLS_PER_BATCH: ${STAGE4_PUBLIC_STATISTICS_MAX_CELLS_PER_BATCH:-10}
+      STAGE4_PUBLIC_STATISTICS_MAX_CELLS_PER_RUN: ${STAGE4_PUBLIC_STATISTICS_MAX_CELLS_PER_RUN:-50}
+      STAGE4_PUBLIC_STATISTICS_ALLOW_FULL_SCOPE: ${STAGE4_PUBLIC_STATISTICS_ALLOW_FULL_SCOPE:-false}
+      STAGE4_PUBLIC_STATISTICS_HARD_CEILING_CELLS: ${STAGE4_PUBLIC_STATISTICS_HARD_CEILING_CELLS:-100000}
+      STAGE4_PUBLIC_RASTER_ZONAL_MAX_CELLS_PER_BATCH: ${STAGE4_PUBLIC_RASTER_ZONAL_MAX_CELLS_PER_BATCH:-50000}
+      STAGE4_PUBLIC_RASTER_ZONAL_RESOLUTION_M: ${STAGE4_PUBLIC_RASTER_ZONAL_RESOLUTION_M:-10}
+      STAGE4_PUBLIC_RASTER_ZONAL_SOURCE_TILE_SIZE_M: ${STAGE4_PUBLIC_RASTER_ZONAL_SOURCE_TILE_SIZE_M:-50000}
+      STAGE4_PUBLIC_RASTER_ZONAL_MAX_PIXELS: ${STAGE4_PUBLIC_RASTER_ZONAL_MAX_PIXELS:-25000000}
+      STAGE4_PUBLIC_RASTER_ZONAL_MIN_FREE_GB: ${STAGE4_PUBLIC_RASTER_ZONAL_MIN_FREE_GB:-5}
+      STAGE4_PUBLIC_RASTER_ZONAL_REUSE_EXISTING_CSV: ${STAGE4_PUBLIC_RASTER_ZONAL_REUSE_EXISTING_CSV:-false}
+      STAGE4_PUBLIC_RASTER_ZONAL_PARTITIONED_MIRROR_ENABLED: ${STAGE4_PUBLIC_RASTER_ZONAL_PARTITIONED_MIRROR_ENABLED:-true}
+      STAGE4_PUBLIC_RASTER_ZONAL_RESULTS_DIR: ${STAGE4_PUBLIC_RASTER_ZONAL_RESULTS_DIR:-/app/artifacts/stage4/public-raster-zonal}
+      STAGE4_PUBLIC_SOURCE_ADAPTER: ${STAGE4_PUBLIC_SOURCE_ADAPTER:-public_stac_cog}
+      STAGE4_PUBLIC_RASTER_CACHE_ENABLED: ${STAGE4_PUBLIC_RASTER_CACHE_ENABLED:-true}
+      STAGE4_PUBLIC_RASTER_CACHE_DIR: ${STAGE4_PUBLIC_RASTER_CACHE_DIR:-/app/artifacts/stage4/public-raster-cache}
+      STAGE4_PUBLIC_STAC_API_URL: ${STAGE4_PUBLIC_STAC_API_URL:-https://earth-search.aws.element84.com/v1/search}
+      STAGE4_PUBLIC_STAC_COLLECTION: ${STAGE4_PUBLIC_STAC_COLLECTION:-sentinel-2-c1-l2a}
+      STAGE4_PUBLIC_STAC_SCENE_LIMIT: ${STAGE4_PUBLIC_STAC_SCENE_LIMIT:-24}
+      STAGE4_BATCH_STATISTICAL_INPUT_URI: ${STAGE4_BATCH_STATISTICAL_INPUT_URI:-}
+      STAGE4_BATCH_STATISTICAL_OUTPUT_URI: ${STAGE4_BATCH_STATISTICAL_OUTPUT_URI:-}
+      STAGE4_BATCH_STATISTICAL_S3_IAM_ROLE_ARN: ""
+      STAGE4_BATCH_STATISTICAL_S3_ACCESS_KEY: ""
+      STAGE4_BATCH_STATISTICAL_S3_SECRET_ACCESS_KEY: ""
+      STAGE4_BATCH_STATISTICAL_S3_REGION: ${STAGE4_BATCH_STATISTICAL_S3_REGION:-WAW3-1}
+      STAGE4_BATCH_STATISTICAL_S3_ENDPOINT_URL: ""
+      STAGE4_BATCH_STATISTICAL_MAX_FEATURES: ${STAGE4_BATCH_STATISTICAL_MAX_FEATURES:-700000}
+      STAGE4_WORK_DIR: ${STAGE4_WORK_DIR:-/app/artifacts/stage4/work}
+      STAGE4_CELL_STATISTICS_MAX_CELLS: ${STAGE4_CELL_STATISTICS_MAX_CELLS:-100000}
+      STAGE4_MAX_CLOUD_COVERAGE: ${STAGE4_MAX_CLOUD_COVERAGE:-40}
+      STAGE4_MIN_VALID_PIXEL_RATIO: ${STAGE4_MIN_VALID_PIXEL_RATIO:-0.35}
+      STAGE4_STATISTICS_RESOLUTION: ${STAGE4_STATISTICS_RESOLUTION:-0.0001}
+      STAGE4_REQUEST_DELAY_SECONDS: ${STAGE4_REQUEST_DELAY_SECONDS:-0}
+      STAGE4_CDSE_TIMEOUT_SECONDS: ${STAGE4_CDSE_TIMEOUT_SECONDS:-60}
+      STAGE4_ALLOW_SOURCE_UNAVAILABLE: ${STAGE4_ALLOW_SOURCE_UNAVAILABLE:-false}
+      STAGE4_SOURCE_UNAVAILABLE_CIRCUIT_COOLDOWN_MINUTES: ${STAGE4_SOURCE_UNAVAILABLE_CIRCUIT_COOLDOWN_MINUTES:-15}
+      STAGE4_SOURCE_UNAVAILABLE_RETRY_SECONDS: ${STAGE4_SOURCE_UNAVAILABLE_RETRY_SECONDS:-900}
+      STAGE4_PROVIDER_MAX_CONCURRENCY: ${STAGE4_PROVIDER_MAX_CONCURRENCY:-1}
+      STAGE4_TASK_SOFT_TIME_LIMIT_SECONDS: ${STAGE4_TASK_SOFT_TIME_LIMIT_SECONDS:-10800}
+      STAGE4_TASK_TIME_LIMIT_SECONDS: ${STAGE4_TASK_TIME_LIMIT_SECONDS:-14400}
+      STAGE4_HISTORY_STORAGE_URI: ${STAGE4_HISTORY_STORAGE_URI:-}
+      STAGE4_BIOMASS_FORMULA_ENABLED: ${STAGE4_BIOMASS_FORMULA_ENABLED:-false}
+      STAGE4_BIOMASS_FORMULA_VERSION: ${STAGE4_BIOMASS_FORMULA_VERSION:-pending-client-calibration}
+      STAGE4_BIOMASS_NDVI_SLOPE: ${STAGE4_BIOMASS_NDVI_SLOPE:-0}
+      STAGE4_BIOMASS_NDVI_INTERCEPT: ${STAGE4_BIOMASS_NDVI_INTERCEPT:-0}
+      STAGE4_BIOMASS_UNIT: ${STAGE4_BIOMASS_UNIT:-t_dry_matter_per_ha}
+      STAGE4_STUCK_AFTER_MINUTES: ${STAGE4_STUCK_AFTER_MINUTES:-120}
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ../test-results:/app/artifacts
+      - ${STAGE4_PUBLIC_RASTER_CACHE_HOST_DIR:-../test-results/stage4/public-raster-cache}:/app/artifacts/stage4/public-raster-cache
+      - ${STAGE4_PUBLIC_RASTER_ZONAL_RESULTS_HOST_DIR:-../test-results/stage4/public-raster-zonal}:/app/artifacts/stage4/public-raster-zonal
+      - ${STAGE4_WORK_HOST_DIR:-../test-results/stage4/work}:/app/artifacts/stage4/work
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+
+  stage4-beat:
+    image: infra-backend
+    build:
+      context: ../backend
+    working_dir: /app
+    command: celery -A app.worker.celery_app beat --loglevel=info --schedule=/tmp/celerybeat-schedule
+    environment:
+      APP_ENV: production
+      TRUST_LOCAL_REVERSE_PROXY_ONLY: true
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: ${POSTGRES_DB:-map1_turkey}
+      POSTGRES_USER: ${POSTGRES_APP_USER:?POSTGRES_APP_USER is required}
+      POSTGRES_PASSWORD: ${POSTGRES_APP_PASSWORD:?POSTGRES_APP_PASSWORD is required}
+      STAGE4_QUEUE_URL: ${STAGE4_QUEUE_URL:-redis://redis:6379/0}
+      STAGE4_RESULT_BACKEND_URL: ${STAGE4_RESULT_BACKEND_URL:-redis://redis:6379/1}
+      STAGE4_SCHEDULER_ENABLED: ${STAGE4_SCHEDULER_ENABLED:-false}
+      STAGE4_UPDATE_CADENCE_DAYS: ${STAGE4_UPDATE_CADENCE_DAYS:-10}
+      STAGE4_BATCH_SIZE: ${STAGE4_BATCH_SIZE:-500000}
+      STAGE4_PROCESSING_PATH: ${STAGE4_PROCESSING_PATH:-public}
+      STAGE4_PROVIDER_ADAPTER: ${STAGE4_PROVIDER_ADAPTER:-public_raster_zonal}
+      STAGE4_NDVI_PROCESSING_MODE: ${STAGE4_NDVI_PROCESSING_MODE:-public_raster_zonal}
+      STAGE4_PUBLIC_PROOF_MAX_CELLS: ${STAGE4_PUBLIC_PROOF_MAX_CELLS:-10}
+      STAGE4_PUBLIC_STATISTICS_MAX_CELLS_PER_BATCH: ${STAGE4_PUBLIC_STATISTICS_MAX_CELLS_PER_BATCH:-10}
+      STAGE4_PUBLIC_STATISTICS_MAX_CELLS_PER_RUN: ${STAGE4_PUBLIC_STATISTICS_MAX_CELLS_PER_RUN:-50}
+      STAGE4_PUBLIC_STATISTICS_ALLOW_FULL_SCOPE: ${STAGE4_PUBLIC_STATISTICS_ALLOW_FULL_SCOPE:-false}
+      STAGE4_PUBLIC_STATISTICS_HARD_CEILING_CELLS: ${STAGE4_PUBLIC_STATISTICS_HARD_CEILING_CELLS:-100000}
+      STAGE4_PUBLIC_RASTER_ZONAL_MAX_CELLS_PER_BATCH: ${STAGE4_PUBLIC_RASTER_ZONAL_MAX_CELLS_PER_BATCH:-50000}
+      STAGE4_PUBLIC_RASTER_ZONAL_RESOLUTION_M: ${STAGE4_PUBLIC_RASTER_ZONAL_RESOLUTION_M:-10}
+      STAGE4_PUBLIC_RASTER_ZONAL_SOURCE_TILE_SIZE_M: ${STAGE4_PUBLIC_RASTER_ZONAL_SOURCE_TILE_SIZE_M:-50000}
+      STAGE4_PUBLIC_RASTER_ZONAL_MAX_PIXELS: ${STAGE4_PUBLIC_RASTER_ZONAL_MAX_PIXELS:-25000000}
+      STAGE4_PUBLIC_RASTER_ZONAL_MIN_FREE_GB: ${STAGE4_PUBLIC_RASTER_ZONAL_MIN_FREE_GB:-5}
+      STAGE4_PUBLIC_RASTER_ZONAL_REUSE_EXISTING_CSV: ${STAGE4_PUBLIC_RASTER_ZONAL_REUSE_EXISTING_CSV:-false}
+      STAGE4_PUBLIC_RASTER_ZONAL_PARTITIONED_MIRROR_ENABLED: ${STAGE4_PUBLIC_RASTER_ZONAL_PARTITIONED_MIRROR_ENABLED:-true}
+      STAGE4_PUBLIC_RASTER_ZONAL_RESULTS_DIR: ${STAGE4_PUBLIC_RASTER_ZONAL_RESULTS_DIR:-/app/artifacts/stage4/public-raster-zonal}
+      STAGE4_PUBLIC_SOURCE_ADAPTER: ${STAGE4_PUBLIC_SOURCE_ADAPTER:-public_stac_cog}
+      STAGE4_PUBLIC_RASTER_CACHE_ENABLED: ${STAGE4_PUBLIC_RASTER_CACHE_ENABLED:-true}
+      STAGE4_PUBLIC_RASTER_CACHE_DIR: ${STAGE4_PUBLIC_RASTER_CACHE_DIR:-/app/artifacts/stage4/public-raster-cache}
+      STAGE4_PUBLIC_STAC_API_URL: ${STAGE4_PUBLIC_STAC_API_URL:-https://earth-search.aws.element84.com/v1/search}
+      STAGE4_PUBLIC_STAC_COLLECTION: ${STAGE4_PUBLIC_STAC_COLLECTION:-sentinel-2-c1-l2a}
+      STAGE4_PUBLIC_STAC_SCENE_LIMIT: ${STAGE4_PUBLIC_STAC_SCENE_LIMIT:-24}
+      STAGE4_BATCH_STATISTICAL_INPUT_URI: ${STAGE4_BATCH_STATISTICAL_INPUT_URI:-}
+      STAGE4_BATCH_STATISTICAL_OUTPUT_URI: ${STAGE4_BATCH_STATISTICAL_OUTPUT_URI:-}
+      STAGE4_BATCH_STATISTICAL_S3_IAM_ROLE_ARN: ""
+      STAGE4_BATCH_STATISTICAL_S3_ACCESS_KEY: ""
+      STAGE4_BATCH_STATISTICAL_S3_SECRET_ACCESS_KEY: ""
+      STAGE4_BATCH_STATISTICAL_S3_REGION: ${STAGE4_BATCH_STATISTICAL_S3_REGION:-WAW3-1}
+      STAGE4_BATCH_STATISTICAL_S3_ENDPOINT_URL: ""
+      STAGE4_BATCH_STATISTICAL_MAX_FEATURES: ${STAGE4_BATCH_STATISTICAL_MAX_FEATURES:-700000}
+      STAGE4_WORK_DIR: ${STAGE4_WORK_DIR:-/app/artifacts/stage4/work}
+      STAGE4_CELL_STATISTICS_MAX_CELLS: ${STAGE4_CELL_STATISTICS_MAX_CELLS:-100000}
+      ACTIVE_REGION_CODE: ${ACTIVE_REGION_CODE:-TR-STAGE1-TEST}
+      ACTIVE_GRID_VERSION: ${ACTIVE_GRID_VERSION:-stage1-test-v1}
+      STAGE1_VERIFICATION_SOURCE_LAYERS: ${STAGE1_VERIFICATION_SOURCE_LAYERS:-ogm_esatis_bolme,osm_forest_mask}
+      STAGE3_PARTITIONED_EVIDENCE_READS: ${STAGE3_PARTITIONED_EVIDENCE_READS:-true}
+      STAGE4_REGION_CODE: ${STAGE4_REGION_CODE:-TR-STAGE3-PUBLIC-OGM-OSM-UNION-FOREST-V10}
+      STAGE4_GRID_VERSION: ${STAGE4_GRID_VERSION:-stage3-public-ogm-osm-union-clean-v10}
+    depends_on:
+      redis:
+        condition: service_healthy
+      db:
+        condition: service_healthy
+    volumes:
+      - ../test-results:/app/artifacts
+      - ${STAGE4_PUBLIC_RASTER_CACHE_HOST_DIR:-../test-results/stage4/public-raster-cache}:/app/artifacts/stage4/public-raster-cache
+      - ${STAGE4_PUBLIC_RASTER_ZONAL_RESULTS_HOST_DIR:-../test-results/stage4/public-raster-zonal}:/app/artifacts/stage4/public-raster-zonal
+      - ${STAGE4_WORK_HOST_DIR:-../test-results/stage4/work}:/app/artifacts/stage4/work
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+
+  frontend:
+    build:
+      context: ../frontend
+      args:
+        VITE_API_BASE_URL: ${FRONTEND_API_BASE_URL:-/api}
+        VITE_APP_LOCALE: ${VITE_APP_LOCALE:-en}
+        VITE_APP_AVAILABLE_LOCALES: ${VITE_APP_AVAILABLE_LOCALES:-en}
+    working_dir: /app
+    environment:
+      VITE_API_BASE_URL: ${FRONTEND_API_BASE_URL:-/api}
+      VITE_API_CREDENTIALS: ${FRONTEND_API_CREDENTIALS:-same-origin}
+      VITE_APP_LOCALE: ${VITE_APP_LOCALE:-en}
+      VITE_APP_AVAILABLE_LOCALES: ${VITE_APP_AVAILABLE_LOCALES:-en}
+      VITE_PREVIEW_API_PROXY_ALLOW_HOSTS: ${VITE_PREVIEW_API_PROXY_ALLOW_HOSTS:-backend}
+      VITE_ENABLE_VECTOR_TILES: ${VITE_ENABLE_VECTOR_TILES:-1}
+      VITE_ENABLE_MAP_STATS: ${VITE_ENABLE_MAP_STATS:-0}
+      MAPBOX_PUBLIC_TOKEN: ${MAPBOX_PUBLIC_TOKEN:-}
+      NPM_CONFIG_UPDATE_NOTIFIER: "false"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:5173/').then((r)=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  caddy:
+    image: caddy:2.11-alpine@sha256:5f5c8640aae01df9654968d946d8f1a56c497f1dd5c5cda4cf95ab7c14d58648
+    profiles: ["demo"]
+    command: >
+      sh -c 'test -n "$$CADDY_BASIC_AUTH_HASH" || { echo "CADDY_BASIC_AUTH_HASH is required"; exit 1; };
+      caddy run --config /etc/caddy/Caddyfile --adapter caddyfile'
+    environment:
+      CADDY_DEMO_DOMAIN: ${CADDY_DEMO_DOMAIN:-localhost}
+      CADDY_BASIC_AUTH_USER: ${CADDY_BASIC_AUTH_USER:-review}
+      CADDY_BASIC_AUTH_HASH: ${CADDY_BASIC_AUTH_HASH:-}
+      CADDY_BACKEND_AUTH_HEADER: ${CADDY_BACKEND_AUTH_HEADER:-}
+    ports:
+      - "${HTTP_BIND_ADDRESS:?HTTP_BIND_ADDRESS is required}:${HTTP_HOST_PORT:-80}:80"
+      - "${HTTPS_BIND_ADDRESS:?HTTPS_BIND_ADDRESS is required}:${HTTPS_HOST_PORT:-443}:443"
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ${CADDY_LOG_DIR:-/var/log/map1-turkey/caddy}:/var/log/caddy
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      backend:
+        condition: service_healthy
+      frontend:
+        condition: service_started
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD", "caddy", "validate", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  migrate:
+    build:
+      context: ../backend
+    profiles: ["tools"]
+    working_dir: /app
+    command: alembic upgrade head
+    environment:
+      APP_ENV: production
+      TRUST_LOCAL_REVERSE_PROXY_ONLY: true
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: ${POSTGRES_DB:-map1_turkey}
+      POSTGRES_USER: ${POSTGRES_USER:-map1}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+      POSTGRES_APP_USER: ${POSTGRES_APP_USER:?POSTGRES_APP_USER is required}
+      POSTGRES_READ_USER: ${POSTGRES_READ_USER:?POSTGRES_READ_USER is required}
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ../test-results:/app/artifacts
+      - ${STAGE4_PUBLIC_RASTER_CACHE_HOST_DIR:-../test-results/stage4/public-raster-cache}:/app/artifacts/stage4/public-raster-cache
+      - ${STAGE4_PUBLIC_RASTER_ZONAL_RESULTS_HOST_DIR:-../test-results/stage4/public-raster-zonal}:/app/artifacts/stage4/public-raster-zonal
+      - ${STAGE4_WORK_HOST_DIR:-../test-results/stage4/work}:/app/artifacts/stage4/work
+
+  stage1-tools:
+    image: infra-backend
+    build:
+      context: ../backend
+    profiles: ["tools"]
+    working_dir: /app
+    command: python -m app.commands.run_stage1_pipeline
+    environment:
+      APP_ENV: production
+      TRUST_LOCAL_REVERSE_PROXY_ONLY: true
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: ${POSTGRES_DB:-map1_turkey}
+      POSTGRES_USER: ${POSTGRES_APP_USER:?POSTGRES_APP_USER is required}
+      POSTGRES_PASSWORD: ${POSTGRES_APP_PASSWORD:?POSTGRES_APP_PASSWORD is required}
+      POSTGRES_APP_USER: ${POSTGRES_APP_USER:?POSTGRES_APP_USER is required}
+      POSTGRES_APP_PASSWORD: ${POSTGRES_APP_PASSWORD:?POSTGRES_APP_PASSWORD is required}
+      POSTGRES_READ_USER: ${POSTGRES_READ_USER:?POSTGRES_READ_USER is required}
+      CDSE_CLIENT_ID: ""
+      CDSE_CLIENT_SECRET: ""
+      CDSE_USERNAME: ""
+      CDSE_PASSWORD: ""
+      CDSE_AUTH_GRANT_TYPE: auto
+      CDSE_TOTP: ""
+      CDSE_PROXY_URL: ""
+      SENTINEL_HUB_STATISTICS_URL: ${SENTINEL_HUB_STATISTICS_URL:-https://sh.dataspace.copernicus.eu/api/v1/statistics}
+      SENTINEL_HUB_BATCH_STATISTICS_URL: ${SENTINEL_HUB_BATCH_STATISTICS_URL:-https://sh.dataspace.copernicus.eu/api/v1/statistics/batch}
+      SENTINEL_HUB_PROCESS_URL: ${SENTINEL_HUB_PROCESS_URL:-https://sh.dataspace.copernicus.eu/api/v1/process}
+      OGM_BASE_URL: ${OGM_BASE_URL:-https://www.ogm.gov.tr}
+      OGM_EHARITA_URL: ${OGM_EHARITA_URL:-https://www.ogm.gov.tr/tr/ormanlarimiz/e-harita}
+      OGM_PORTAL_URL: ${OGM_PORTAL_URL:-https://cbsportal.ogm.gov.tr/ogmportal}
+      OGM_WEBMAP_ITEM_ID: ${OGM_WEBMAP_ITEM_ID:-1d210d5cd6cd42ecb7431e28995a0bc8}
+      OGM_ARAZI_ORTUSU_WMS_URL: ${OGM_ARAZI_ORTUSU_WMS_URL:-https://wsapi.ogm.gov.tr/apigateway/ARAZI_ORTUSU_WMS}
+      OGM_MESCERE_WMS_URL: ${OGM_MESCERE_WMS_URL:-https://wsapi.ogm.gov.tr/apigateway/YAYIN_MESCERE_WMS}
+      OGM_SEFLIK_WMS_URL: ${OGM_SEFLIK_WMS_URL:-https://wsapi.ogm.gov.tr/apigateway/YAYIN_SEFLIK_WMS}
+      OGM_ISLETME_WMS_URL: ${OGM_ISLETME_WMS_URL:-https://wsapi.ogm.gov.tr/apigateway/YAYIN_ISLETME_WMS}
+      OGM_BOLGE_WMS_URL: ${OGM_BOLGE_WMS_URL:-https://wsapi.ogm.gov.tr/apigateway/INT_BOLGE_WMS}
+      OGM_INDEKS_WMS_URL: ${OGM_INDEKS_WMS_URL:-https://wsapi.ogm.gov.tr/apigateway/YAYIN_INDEKS_WMS}
+      OGM_BOLME_FEATURE_URL: ${OGM_BOLME_FEATURE_URL:-https://wsapi.ogm.gov.tr/apigateway/ESATIS_BOLME/0}
+      OGM_TLS_VERIFY: ${OGM_TLS_VERIFY:-true}
+      OGM_PROXY_URL: ${OGM_PROXY_URL:-}
+      TUCBS_ORMAN_WMS_URL: ${TUCBS_ORMAN_WMS_URL:-https://tucbs-public-api.csb.gov.tr/ormansu_orman}
+      ACTIVE_REGION_CODE: ${ACTIVE_REGION_CODE:-TR-STAGE1-TEST}
+      ACTIVE_GRID_VERSION: ${ACTIVE_GRID_VERSION:-stage1-test-v1}
+      STAGE1_VERIFICATION_SOURCE_LAYERS: ${STAGE1_VERIFICATION_SOURCE_LAYERS:-ogm_esatis_bolme,osm_forest_mask}
+      STAGE3_PARTITIONED_EVIDENCE_READS: ${STAGE3_PARTITIONED_EVIDENCE_READS:-true}
+      STAGE1_LAYER_A_SOURCE_LAYERS: ${STAGE1_LAYER_A_SOURCE_LAYERS:-ogm_esatis_bolme,ogm_yayin_mescere_wms_svg}
+      STAGE3_FOREST_MASK_SOURCE_LAYERS: ${STAGE3_FOREST_MASK_SOURCE_LAYERS:-ogm_esatis_bolme,ogm_yayin_mescere_wms_svg}
+      STAGE4_REGION_CODE: ${STAGE4_REGION_CODE:-TR-STAGE3-PUBLIC-OGM-OSM-UNION-FOREST-V10}
+      STAGE4_GRID_VERSION: ${STAGE4_GRID_VERSION:-stage3-public-ogm-osm-union-clean-v10}
+      STAGE4_UPDATE_CADENCE_DAYS: ${STAGE4_UPDATE_CADENCE_DAYS:-10}
+      STAGE4_BATCH_SIZE: ${STAGE4_BATCH_SIZE:-500000}
+      STAGE4_PROCESSING_PATH: ${STAGE4_PROCESSING_PATH:-public}
+      STAGE4_PROVIDER_ADAPTER: ${STAGE4_PROVIDER_ADAPTER:-public_raster_zonal}
+      STAGE4_NDVI_PROCESSING_MODE: ${STAGE4_NDVI_PROCESSING_MODE:-public_raster_zonal}
+      STAGE4_PUBLIC_PROOF_MAX_CELLS: ${STAGE4_PUBLIC_PROOF_MAX_CELLS:-10}
+      STAGE4_PUBLIC_STATISTICS_MAX_CELLS_PER_BATCH: ${STAGE4_PUBLIC_STATISTICS_MAX_CELLS_PER_BATCH:-10}
+      STAGE4_PUBLIC_STATISTICS_MAX_CELLS_PER_RUN: ${STAGE4_PUBLIC_STATISTICS_MAX_CELLS_PER_RUN:-50}
+      STAGE4_PUBLIC_STATISTICS_ALLOW_FULL_SCOPE: ${STAGE4_PUBLIC_STATISTICS_ALLOW_FULL_SCOPE:-false}
+      STAGE4_PUBLIC_STATISTICS_HARD_CEILING_CELLS: ${STAGE4_PUBLIC_STATISTICS_HARD_CEILING_CELLS:-100000}
+      STAGE4_PUBLIC_RASTER_ZONAL_MAX_CELLS_PER_BATCH: ${STAGE4_PUBLIC_RASTER_ZONAL_MAX_CELLS_PER_BATCH:-50000}
+      STAGE4_PUBLIC_RASTER_ZONAL_RESOLUTION_M: ${STAGE4_PUBLIC_RASTER_ZONAL_RESOLUTION_M:-10}
+      STAGE4_PUBLIC_RASTER_ZONAL_SOURCE_TILE_SIZE_M: ${STAGE4_PUBLIC_RASTER_ZONAL_SOURCE_TILE_SIZE_M:-50000}
+      STAGE4_PUBLIC_RASTER_ZONAL_MAX_PIXELS: ${STAGE4_PUBLIC_RASTER_ZONAL_MAX_PIXELS:-25000000}
+      STAGE4_PUBLIC_RASTER_ZONAL_MIN_FREE_GB: ${STAGE4_PUBLIC_RASTER_ZONAL_MIN_FREE_GB:-5}
+      STAGE4_PUBLIC_RASTER_ZONAL_REUSE_EXISTING_CSV: ${STAGE4_PUBLIC_RASTER_ZONAL_REUSE_EXISTING_CSV:-false}
+      STAGE4_PUBLIC_RASTER_ZONAL_PARTITIONED_MIRROR_ENABLED: ${STAGE4_PUBLIC_RASTER_ZONAL_PARTITIONED_MIRROR_ENABLED:-true}
+      STAGE4_PUBLIC_RASTER_ZONAL_RESULTS_DIR: ${STAGE4_PUBLIC_RASTER_ZONAL_RESULTS_DIR:-/app/artifacts/stage4/public-raster-zonal}
+      STAGE4_PUBLIC_SOURCE_ADAPTER: ${STAGE4_PUBLIC_SOURCE_ADAPTER:-public_stac_cog}
+      STAGE4_PUBLIC_RASTER_CACHE_ENABLED: ${STAGE4_PUBLIC_RASTER_CACHE_ENABLED:-true}
+      STAGE4_PUBLIC_RASTER_CACHE_DIR: ${STAGE4_PUBLIC_RASTER_CACHE_DIR:-/app/artifacts/stage4/public-raster-cache}
+      STAGE4_PUBLIC_STAC_API_URL: ${STAGE4_PUBLIC_STAC_API_URL:-https://earth-search.aws.element84.com/v1/search}
+      STAGE4_PUBLIC_STAC_COLLECTION: ${STAGE4_PUBLIC_STAC_COLLECTION:-sentinel-2-c1-l2a}
+      STAGE4_PUBLIC_STAC_SCENE_LIMIT: ${STAGE4_PUBLIC_STAC_SCENE_LIMIT:-24}
+      STAGE4_BATCH_STATISTICAL_INPUT_URI: ${STAGE4_BATCH_STATISTICAL_INPUT_URI:-}
+      STAGE4_BATCH_STATISTICAL_OUTPUT_URI: ${STAGE4_BATCH_STATISTICAL_OUTPUT_URI:-}
+      STAGE4_BATCH_STATISTICAL_S3_IAM_ROLE_ARN: ""
+      STAGE4_BATCH_STATISTICAL_S3_ACCESS_KEY: ""
+      STAGE4_BATCH_STATISTICAL_S3_SECRET_ACCESS_KEY: ""
+      STAGE4_BATCH_STATISTICAL_S3_REGION: ${STAGE4_BATCH_STATISTICAL_S3_REGION:-WAW3-1}
+      STAGE4_BATCH_STATISTICAL_S3_ENDPOINT_URL: ""
+      STAGE4_BATCH_STATISTICAL_MAX_FEATURES: ${STAGE4_BATCH_STATISTICAL_MAX_FEATURES:-700000}
+      STAGE4_WORK_DIR: ${STAGE4_WORK_DIR:-/app/artifacts/stage4/work}
+      STAGE4_CELL_STATISTICS_MAX_CELLS: ${STAGE4_CELL_STATISTICS_MAX_CELLS:-100000}
+      STAGE4_HISTORY_STORAGE_URI: ${STAGE4_HISTORY_STORAGE_URI:-}
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ../test-results:/app/artifacts
+      - ${STAGE4_PUBLIC_RASTER_CACHE_HOST_DIR:-../test-results/stage4/public-raster-cache}:/app/artifacts/stage4/public-raster-cache
+      - ${STAGE4_PUBLIC_RASTER_ZONAL_RESULTS_HOST_DIR:-../test-results/stage4/public-raster-zonal}:/app/artifacts/stage4/public-raster-zonal
+      - ${STAGE4_WORK_HOST_DIR:-../test-results/stage4/work}:/app/artifacts/stage4/work
+
+volumes:
+  postgres_data:
+  redis_data:
+  caddy_data:
+  caddy_config:

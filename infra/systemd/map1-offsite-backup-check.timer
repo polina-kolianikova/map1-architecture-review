@@ -1,0 +1,11 @@
+[Unit]
+Description=Hourly Map 1 external backup freshness check
+
+[Timer]
+OnCalendar=hourly
+Persistent=true
+RandomizedDelaySec=5m
+Unit=map1-offsite-backup-check.service
+
+[Install]
+WantedBy=timers.target

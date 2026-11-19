@@ -1,0 +1,113 @@
+# Opt-in only, AFTER the mount gate and installation of map1-workers.slice.
+# Overlay the standalone production file, never the development Compose file.
+# Database paths must contain a verified, stopped-cluster copy before deployment.
+x-worker-budget: &worker-budget
+  cgroup_parent: map1-workers.slice
+  cpus: 2
+  mem_limit: 3g
+  memswap_limit: 3g
+  pids_limit: 128
+  restart: "no"
+
+x-storage: &storage
+  - type: bind
+    source: ${MAP1_STORAGE_ROOT:?Set the UUID-verified storage root}/artifacts
+    target: /app/artifacts
+    bind: {create_host_path: false}
+  - type: bind
+    source: ${MAP1_STORAGE_ROOT:?Set the UUID-verified storage root}/cache
+    target: /app/artifacts/stage4/public-raster-cache
+    bind: {create_host_path: false}
+  - type: bind
+    source: ${MAP1_STORAGE_ROOT:?Set the UUID-verified storage root}/zonal
+    target: /app/artifacts/stage4/public-raster-zonal
+    bind: {create_host_path: false}
+  - type: bind
+    source: ${MAP1_STORAGE_ROOT:?Set the UUID-verified storage root}/work
+    target: /app/artifacts/stage4/work
+    bind: {create_host_path: false}
+
+x-logs: &logs
+  driver: json-file
+  options: {max-size: "10m", max-file: "3"}
+
+services:
+  db:
+    restart: "no"
+    volumes:
+      - type: bind
+        source: ${MAP1_STORAGE_ROOT:?Set the UUID-verified storage root}/postgres
+        target: /var/lib/postgresql/data
+        bind: {create_host_path: false}
+      - type: bind
+        source: ${MAP1_STORAGE_ROOT:?Set the UUID-verified storage root}/tablespace
+        target: /var/lib/postgresql/stage4_tablespace
+        bind: {create_host_path: false}
+    cpus: ${MAP1_DB_CPUS:?Set a measured database CPU budget}
+    mem_limit: ${MAP1_DB_MEMORY_LIMIT:?Set a measured database memory budget}
+    memswap_limit: ${MAP1_DB_MEMORY_LIMIT:?Set a measured database memory budget}
+    pids_limit: 256
+    logging: *logs
+  redis:
+    restart: "no"
+    cpus: 0.25
+    mem_limit: 256m
+    memswap_limit: 256m
+    pids_limit: 64
+    logging: *logs
+  backend:
+    environment:
+      STAGE4_SCHEDULER_ENABLED: "false"
+    cpus: 1
+    mem_limit: 1g
+    memswap_limit: 1g
+    pids_limit: 128
+    restart: "no"
+    volumes: *storage
+    logging: *logs
+  frontend:
+    restart: "no"
+    cpus: 0.5
+    mem_limit: 512m
+    memswap_limit: 512m
+    pids_limit: 64
+    logging: *logs
+  caddy:
+    restart: "no"
+    cpus: 0.25
+    mem_limit: 256m
+    memswap_limit: 256m
+    pids_limit: 64
+    logging: *logs
+  stage4-worker:
+    profiles: ["processing"]
+    <<: *worker-budget
+    command: celery -A app.worker.celery_app worker --loglevel=info --queues=stage4 --concurrency=1 --prefetch-multiplier=1
+    environment:
+      STAGE4_SCHEDULER_ENABLED: "false"
+    volumes: *storage
+    logging: *logs
+  stage4-beat:
+    profiles: ["processing"]
+    <<: *worker-budget
+    cpus: 0.25
+    mem_limit: 256m
+    memswap_limit: 256m
+    environment:
+      STAGE4_SCHEDULER_ENABLED: "false"
+    volumes: *storage
+    logging: *logs
+  stage1-tools:
+    <<: *worker-budget
+    network_mode: host
+    environment:
+      POSTGRES_HOST: "127.0.0.1"
+      POSTGRES_PORT: ${POSTGRES_HOST_PORT:-5433}
+      OGM_PROXY_URL: ${MAP1_OGM_PROXY_URL:?Set the verified project OGM proxy}
+      TMPDIR: /app/artifacts/stage3/tmp
+    volumes: *storage
+    logging: *logs
+  migrate:
+    <<: *worker-budget
+    volumes: *storage
+    logging: *logs

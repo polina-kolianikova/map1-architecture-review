@@ -1,0 +1,20 @@
+{
+  "Rules": [
+    {
+      "ID": "Map1DailySevenDays",
+      "Status": "Enabled",
+      "Filter": {"Prefix": "map1/daily/"},
+      "Expiration": {"Days": 7},
+      "NoncurrentVersionExpiration": {"NoncurrentDays": 1},
+      "AbortIncompleteMultipartUpload": {"DaysAfterInitiation": 1}
+    },
+    {
+      "ID": "Map1WeeklyFourWeeks",
+      "Status": "Enabled",
+      "Filter": {"Prefix": "map1/weekly/"},
+      "Expiration": {"Days": 28},
+      "NoncurrentVersionExpiration": {"NoncurrentDays": 1},
+      "AbortIncompleteMultipartUpload": {"DaysAfterInitiation": 1}
+    }
+  ]
+}

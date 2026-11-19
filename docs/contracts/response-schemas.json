@@ -1,0 +1,377 @@
+{
+  "OmittedService": {
+    "type": "object",
+    "required": [
+      "detail"
+    ],
+    "properties": {
+      "detail": {
+        "type": "object",
+        "required": [
+          "code",
+          "message",
+          "method",
+          "path"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "method": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "Health": {
+    "type": "object",
+    "required": [
+      "status"
+    ],
+    "properties": {
+      "status": {
+        "type": "string"
+      }
+    }
+  },
+  "AssetPage": {
+    "type": "object",
+    "required": [
+      "limit",
+      "offset",
+      "total",
+      "exact_total",
+      "has_more",
+      "rows"
+    ],
+    "properties": {
+      "limit": {
+        "type": "integer"
+      },
+      "offset": {
+        "type": "integer"
+      },
+      "total": {
+        "type": "integer"
+      },
+      "exact_total": {
+        "type": "boolean"
+      },
+      "has_more": {
+        "type": "boolean"
+      },
+      "rows": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/AssetRecord"
+        }
+      }
+    }
+  },
+  "AssetIds": {
+    "type": "object",
+    "required": [
+      "limit",
+      "total",
+      "exact_total",
+      "truncated",
+      "ids"
+    ],
+    "properties": {
+      "limit": {
+        "type": "integer"
+      },
+      "total": {
+        "type": "integer"
+      },
+      "exact_total": {
+        "type": "boolean"
+      },
+      "truncated": {
+        "type": "boolean"
+      },
+      "ids": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    }
+  },
+  "NdviHistory": {
+    "type": "object",
+    "required": [
+      "cell_uuid",
+      "months",
+      "rows"
+    ],
+    "properties": {
+      "cell_uuid": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "months": {
+        "type": "integer"
+      },
+      "rows": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "description": "Public observation fields; processing payloads and values omitted.",
+          "properties": {
+            "acquisition_date": {
+              "type": "string",
+              "format": "date"
+            },
+            "ndvi": {
+              "type": [
+                "number",
+                "string",
+                "null"
+              ]
+            },
+            "status": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "valid_pixel_count": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "valid_pixel_ratio": {
+              "type": [
+                "number",
+                "string",
+                "null"
+              ]
+            }
+          },
+          "additionalProperties": true
+        }
+      }
+    }
+  },
+  "Localization": {
+    "type": "object",
+    "properties": {
+      "default_locale": {
+        "type": "string"
+      },
+      "fallback_locale": {
+        "type": "string"
+      },
+      "supported_locales": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "version": {
+        "type": "string"
+      }
+    }
+  },
+  "AssetRecord": {
+    "type": "object",
+    "description": "Public field-name projection of the current asset response. Nullable/provider-dependent fields and numeric-as-string serialization are preserved as open contracts. Not a fake asset fixture.",
+    "properties": {
+      "id": {
+        "type": "integer"
+      },
+      "cell_uuid": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "region_code": {
+        "type": "string"
+      },
+      "grid_version": {
+        "type": "string"
+      },
+      "area_ha": {
+        "type": [
+          "number",
+          "string",
+          "null"
+        ]
+      },
+      "geometry": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "GeoJSON geometry, canonical WGS84. No geometry data is distributed."
+      },
+      "area_coefficient": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "verification_result_id": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "anomaly_type": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Current result status: ok, watch, anomaly, insufficient_data or unverified. No classification thresholds included."
+      },
+      "explanation": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "acquisition_date": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "previous_ndvi": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "previous_acquisition_date": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "previous_observation_id": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "layer_a_relation": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "layer_a_intersection_area_ha": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "layer_a_coverage_ratio": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "layer_a_source_name": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "layer_a_source_quality": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "layer_a_official_status": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "layer_a_source_checked_at": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "layer_a_latest_check_at": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "layer_a_latest_check_status": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "layer_a_latest_check_feature_count": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "layer_a_data_age_days": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "observation_status": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "observation_cloud_coverage": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "audit_event_count": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "carbon_soil_tco2e": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "carbon_biomass_tco2e": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "carbon_root_tco2e": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "carbon_total_potential_tco2e": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "carbon_assessment_year": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "carbon_previous_annual_assessment_id": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "carbon_gross_increment_tco2e_ha_yr": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "carbon_loss_factor_tco2e_ha_yr": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "carbon_net_annual_increment_tco2e_ha_yr": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "carbon_net_annual_increment_tco2e_yr": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "carbon_total_potential_delta_tco2e": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "carbon_net_annual_increment_delta_tco2e_ha_yr": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "carbon_net_annual_increment_delta_tco2e_yr": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "carbon_unit": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "carbon_soil_input_status": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "carbon_biomass_input_status": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "carbon_root_input_status": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "carbon_total_potential_status": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "carbon_coefficient_status": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "carbon_coefficient_scope": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "carbon_methodology_version": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "carbon_calculation_status": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "carbon_coefficient_set_version": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "carbon_verification_factor": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "carbon_confidence_score": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "carbon_calibration_source": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "carbon_increment_model": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "carbon_audit_event_count": {
+        "description": "Public response field; value and private derivation omitted."
+      },
+      "carbon_readiness": {
+        "description": "Public response field; value and private derivation omitted."
+      }
+    },
+    "additionalProperties": true
+  }
+}

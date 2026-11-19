@@ -1,0 +1,2049 @@
+{
+  "source": "Current route declarations; no production imports or execution.",
+  "backend_prefix": "",
+  "public_reverse_proxy_prefix": "/api",
+  "production_response_fields_note": "Top-level fields statically observed in return dictionaries; not a claim of complete response schemas.",
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/health",
+      "public_proxy_path": "/api/health",
+      "operation_id": "health",
+      "tag": "health",
+      "source_module": "backend/app/api/health.py",
+      "parameters": [],
+      "production_response_top_level_fields": [
+        "status"
+      ],
+      "sample_behavior": "health"
+    },
+    {
+      "method": "GET",
+      "path": "/health/db",
+      "public_proxy_path": "/api/health/db",
+      "operation_id": "database_health",
+      "tag": "health",
+      "source_module": "backend/app/api/health.py",
+      "parameters": [],
+      "production_response_top_level_fields": [
+        "status",
+        "postgis"
+      ],
+      "sample_behavior": "database_read"
+    },
+    {
+      "method": "GET",
+      "path": "/meta/localization",
+      "public_proxy_path": "/api/meta/localization",
+      "operation_id": "localization",
+      "tag": "meta",
+      "source_module": "backend/app/api/meta.py",
+      "parameters": [],
+      "production_response_top_level_fields": [],
+      "sample_behavior": "implemented_metadata"
+    },
+    {
+      "method": "GET",
+      "path": "/stage1/summary",
+      "public_proxy_path": "/api/stage1/summary",
+      "operation_id": "get_summary",
+      "tag": "stage1",
+      "source_module": "backend/app/api/stage1.py",
+      "parameters": [
+        {
+          "name": "region_code",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grid_version",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "production_response_top_level_fields": [
+        "layer_a_sources",
+        "data_quality",
+        "verification_status"
+      ],
+      "sample_behavior": "database_read"
+    },
+    {
+      "method": "GET",
+      "path": "/stage1/source-strategy",
+      "public_proxy_path": "/api/stage1/source-strategy",
+      "operation_id": "get_source_strategy",
+      "tag": "stage1",
+      "source_module": "backend/app/api/stage1.py",
+      "parameters": [],
+      "production_response_top_level_fields": [],
+      "sample_behavior": "implemented_metadata"
+    },
+    {
+      "method": "GET",
+      "path": "/stage1/regions",
+      "public_proxy_path": "/api/stage1/regions",
+      "operation_id": "list_regions",
+      "tag": "stage1",
+      "source_module": "backend/app/api/stage1.py",
+      "parameters": [
+        {
+          "name": "limit",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          },
+          "required": false,
+          "default": 20,
+          "minimum": 1,
+          "maximum": 100
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          },
+          "required": false,
+          "default": 0,
+          "minimum": 0
+        },
+        {
+          "name": "region_code",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grid_version",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "production_response_top_level_fields": [],
+      "sample_behavior": "database_read"
+    },
+    {
+      "method": "GET",
+      "path": "/stage1/layer-a",
+      "public_proxy_path": "/api/stage1/layer-a",
+      "operation_id": "list_layer_a",
+      "tag": "stage1",
+      "source_module": "backend/app/api/stage1.py",
+      "parameters": [
+        {
+          "name": "limit",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          },
+          "required": false,
+          "default": 100,
+          "minimum": 1,
+          "maximum": 500
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          },
+          "required": false,
+          "default": 0,
+          "minimum": 0
+        },
+        {
+          "name": "include_geometry",
+          "in": "query",
+          "schema": {
+            "type": "boolean"
+          },
+          "required": false,
+          "default": true
+        },
+        {
+          "name": "region_code",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grid_version",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "production_response_top_level_fields": [],
+      "sample_behavior": "database_read"
+    },
+    {
+      "method": "GET",
+      "path": "/stage1/grid-cells",
+      "public_proxy_path": "/api/stage1/grid-cells",
+      "operation_id": "list_grid_cells",
+      "tag": "stage1",
+      "source_module": "backend/app/api/stage1.py",
+      "parameters": [
+        {
+          "name": "limit",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          },
+          "required": false,
+          "default": 100,
+          "minimum": 1,
+          "maximum": 500
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          },
+          "required": false,
+          "default": 0,
+          "minimum": 0
+        },
+        {
+          "name": "region_code",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grid_version",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "production_response_top_level_fields": [],
+      "sample_behavior": "database_read"
+    },
+    {
+      "method": "GET",
+      "path": "/stage1/observations",
+      "public_proxy_path": "/api/stage1/observations",
+      "operation_id": "list_observations",
+      "tag": "stage1",
+      "source_module": "backend/app/api/stage1.py",
+      "parameters": [
+        {
+          "name": "limit",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          },
+          "required": false,
+          "default": 50,
+          "minimum": 1,
+          "maximum": 200
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          },
+          "required": false,
+          "default": 0,
+          "minimum": 0
+        },
+        {
+          "name": "region_code",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grid_version",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "production_response_top_level_fields": [],
+      "sample_behavior": "database_read"
+    },
+    {
+      "method": "GET",
+      "path": "/stage1/verification",
+      "public_proxy_path": "/api/stage1/verification",
+      "operation_id": "list_verification",
+      "tag": "stage1",
+      "source_module": "backend/app/api/stage1.py",
+      "parameters": [
+        {
+          "name": "limit",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          },
+          "required": false,
+          "default": 50,
+          "minimum": 1,
+          "maximum": 200
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          },
+          "required": false,
+          "default": 0,
+          "minimum": 0
+        },
+        {
+          "name": "region_code",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grid_version",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "production_response_top_level_fields": [],
+      "sample_behavior": "database_read"
+    },
+    {
+      "method": "GET",
+      "path": "/stage1/verification-audit",
+      "public_proxy_path": "/api/stage1/verification-audit",
+      "operation_id": "list_verification_audit",
+      "tag": "stage1",
+      "source_module": "backend/app/api/stage1.py",
+      "parameters": [
+        {
+          "name": "limit",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          },
+          "required": false,
+          "default": 50,
+          "minimum": 1,
+          "maximum": 200
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          },
+          "required": false,
+          "default": 0,
+          "minimum": 0
+        },
+        {
+          "name": "cell_uuid",
+          "in": "query",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "region_code",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grid_version",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "production_response_top_level_fields": [],
+      "sample_behavior": "database_read"
+    },
+    {
+      "method": "GET",
+      "path": "/stage2/assets",
+      "public_proxy_path": "/api/stage2/assets",
+      "operation_id": "list_assets",
+      "tag": "stage2",
+      "source_module": "backend/app/api/stage2.py",
+      "parameters": [
+        {
+          "name": "limit",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          },
+          "required": false,
+          "default": 100,
+          "minimum": 1,
+          "maximum": 500
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          },
+          "required": false,
+          "default": 0,
+          "minimum": 0
+        },
+        {
+          "name": "status",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "carbon_status",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "signal_status",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "observed_from",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": ""
+        },
+        {
+          "name": "observed_to",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": ""
+        },
+        {
+          "name": "search",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": ""
+        },
+        {
+          "name": "region_code",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grid_version",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "production_response_top_level_fields": [
+        "limit",
+        "offset",
+        "total",
+        "exact_total",
+        "has_more",
+        "rows"
+      ],
+      "sample_behavior": "database_read"
+    },
+    {
+      "method": "GET",
+      "path": "/stage2/assets/ids",
+      "public_proxy_path": "/api/stage2/assets/ids",
+      "operation_id": "list_asset_ids",
+      "tag": "stage2",
+      "source_module": "backend/app/api/stage2.py",
+      "parameters": [
+        {
+          "name": "limit",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          },
+          "required": false,
+          "default": 10000,
+          "minimum": 1,
+          "maximum": 20000
+        },
+        {
+          "name": "status",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "carbon_status",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "signal_status",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "observed_from",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": ""
+        },
+        {
+          "name": "observed_to",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": ""
+        },
+        {
+          "name": "search",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": ""
+        },
+        {
+          "name": "region_code",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grid_version",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "production_response_top_level_fields": [
+        "limit",
+        "total",
+        "exact_total",
+        "truncated",
+        "ids"
+      ],
+      "sample_behavior": "database_read"
+    },
+    {
+      "method": "GET",
+      "path": "/stage2/assets/pick",
+      "public_proxy_path": "/api/stage2/assets/pick",
+      "operation_id": "pick_asset",
+      "tag": "stage2",
+      "source_module": "backend/app/api/stage2.py",
+      "parameters": [
+        {
+          "name": "lng",
+          "in": "query",
+          "schema": {
+            "type": "number"
+          },
+          "required": true,
+          "default": null,
+          "minimum": -180,
+          "maximum": 180
+        },
+        {
+          "name": "lat",
+          "in": "query",
+          "schema": {
+            "type": "number"
+          },
+          "required": true,
+          "default": null,
+          "minimum": -90,
+          "maximum": 90
+        },
+        {
+          "name": "region_code",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grid_version",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "production_response_top_level_fields": [],
+      "sample_behavior": "database_read"
+    },
+    {
+      "method": "GET",
+      "path": "/stage2/assets/{cell_uuid}",
+      "public_proxy_path": "/api/stage2/assets/{cell_uuid}",
+      "operation_id": "get_asset",
+      "tag": "stage2",
+      "source_module": "backend/app/api/stage2.py",
+      "parameters": [
+        {
+          "name": "cell_uuid",
+          "in": "path",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "required": true
+        },
+        {
+          "name": "region_code",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grid_version",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "production_response_top_level_fields": [],
+      "sample_behavior": "database_read"
+    },
+    {
+      "method": "GET",
+      "path": "/stage2/assets/{cell_uuid}/ndvi-history",
+      "public_proxy_path": "/api/stage2/assets/{cell_uuid}/ndvi-history",
+      "operation_id": "get_asset_ndvi_history",
+      "tag": "stage2",
+      "source_module": "backend/app/api/stage2.py",
+      "parameters": [
+        {
+          "name": "cell_uuid",
+          "in": "path",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "required": true
+        },
+        {
+          "name": "months",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          },
+          "required": false,
+          "default": 12,
+          "minimum": 1,
+          "maximum": 36
+        },
+        {
+          "name": "region_code",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grid_version",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "production_response_top_level_fields": [
+        "cell_uuid",
+        "months",
+        "rows"
+      ],
+      "sample_behavior": "database_read"
+    },
+    {
+      "method": "GET",
+      "path": "/stage2/tiles/grid/{z}/{x}/{y}.mvt",
+      "public_proxy_path": "/api/stage2/tiles/grid/{z}/{x}/{y}.mvt",
+      "operation_id": "grid_tile",
+      "tag": "stage2",
+      "source_module": "backend/app/api/stage2.py",
+      "parameters": [
+        {
+          "name": "z",
+          "in": "path",
+          "schema": {
+            "type": "integer"
+          },
+          "required": true
+        },
+        {
+          "name": "x",
+          "in": "path",
+          "schema": {
+            "type": "integer"
+          },
+          "required": true
+        },
+        {
+          "name": "y",
+          "in": "path",
+          "schema": {
+            "type": "integer"
+          },
+          "required": true
+        },
+        {
+          "name": "status",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "carbon_status",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "signal_status",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "observed_from",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": ""
+        },
+        {
+          "name": "observed_to",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": ""
+        },
+        {
+          "name": "search",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": ""
+        },
+        {
+          "name": "region_code",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grid_version",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "production_response_top_level_fields": [],
+      "sample_behavior": "database_read"
+    },
+    {
+      "method": "GET",
+      "path": "/stage2/tiles/mask/{z}/{x}/{y}.mvt",
+      "public_proxy_path": "/api/stage2/tiles/mask/{z}/{x}/{y}.mvt",
+      "operation_id": "mask_tile",
+      "tag": "stage2",
+      "source_module": "backend/app/api/stage2.py",
+      "parameters": [
+        {
+          "name": "z",
+          "in": "path",
+          "schema": {
+            "type": "integer"
+          },
+          "required": true
+        },
+        {
+          "name": "x",
+          "in": "path",
+          "schema": {
+            "type": "integer"
+          },
+          "required": true
+        },
+        {
+          "name": "y",
+          "in": "path",
+          "schema": {
+            "type": "integer"
+          },
+          "required": true
+        },
+        {
+          "name": "region_code",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grid_version",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "production_response_top_level_fields": [],
+      "sample_behavior": "database_read"
+    },
+    {
+      "method": "GET",
+      "path": "/stage2/tiles/layer-a/{z}/{x}/{y}.mvt",
+      "public_proxy_path": "/api/stage2/tiles/layer-a/{z}/{x}/{y}.mvt",
+      "operation_id": "layer_a_tile",
+      "tag": "stage2",
+      "source_module": "backend/app/api/stage2.py",
+      "parameters": [
+        {
+          "name": "z",
+          "in": "path",
+          "schema": {
+            "type": "integer"
+          },
+          "required": true
+        },
+        {
+          "name": "x",
+          "in": "path",
+          "schema": {
+            "type": "integer"
+          },
+          "required": true
+        },
+        {
+          "name": "y",
+          "in": "path",
+          "schema": {
+            "type": "integer"
+          },
+          "required": true
+        },
+        {
+          "name": "region_code",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grid_version",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "production_response_top_level_fields": [],
+      "sample_behavior": "database_read"
+    },
+    {
+      "method": "GET",
+      "path": "/stage2/tiles/layer-b/{z}/{x}/{y}.mvt",
+      "public_proxy_path": "/api/stage2/tiles/layer-b/{z}/{x}/{y}.mvt",
+      "operation_id": "layer_b_tile",
+      "tag": "stage2",
+      "source_module": "backend/app/api/stage2.py",
+      "parameters": [
+        {
+          "name": "z",
+          "in": "path",
+          "schema": {
+            "type": "integer"
+          },
+          "required": true
+        },
+        {
+          "name": "x",
+          "in": "path",
+          "schema": {
+            "type": "integer"
+          },
+          "required": true
+        },
+        {
+          "name": "y",
+          "in": "path",
+          "schema": {
+            "type": "integer"
+          },
+          "required": true
+        },
+        {
+          "name": "status",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "carbon_status",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "signal_status",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "observed_from",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": ""
+        },
+        {
+          "name": "observed_to",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": ""
+        },
+        {
+          "name": "search",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": ""
+        },
+        {
+          "name": "region_code",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grid_version",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "production_response_top_level_fields": [],
+      "sample_behavior": "database_read"
+    },
+    {
+      "method": "GET",
+      "path": "/stage2/tiles/layer-c/{z}/{x}/{y}.mvt",
+      "public_proxy_path": "/api/stage2/tiles/layer-c/{z}/{x}/{y}.mvt",
+      "operation_id": "layer_c_tile",
+      "tag": "stage2",
+      "source_module": "backend/app/api/stage2.py",
+      "parameters": [
+        {
+          "name": "z",
+          "in": "path",
+          "schema": {
+            "type": "integer"
+          },
+          "required": true
+        },
+        {
+          "name": "x",
+          "in": "path",
+          "schema": {
+            "type": "integer"
+          },
+          "required": true
+        },
+        {
+          "name": "y",
+          "in": "path",
+          "schema": {
+            "type": "integer"
+          },
+          "required": true
+        },
+        {
+          "name": "status",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "carbon_status",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "signal_status",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "observed_from",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": ""
+        },
+        {
+          "name": "observed_to",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": ""
+        },
+        {
+          "name": "search",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": ""
+        },
+        {
+          "name": "region_code",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grid_version",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "production_response_top_level_fields": [],
+      "sample_behavior": "database_read"
+    },
+    {
+      "method": "GET",
+      "path": "/stage4/status",
+      "public_proxy_path": "/api/stage4/status",
+      "operation_id": "stage4_status",
+      "tag": "stage4",
+      "source_module": "backend/app/api/stage4.py",
+      "parameters": [
+        {
+          "name": "region_code",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grid_version",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "production_response_top_level_fields": [
+        "stage",
+        "scope",
+        "region_code",
+        "grid_version",
+        "scheduler_enabled",
+        "cadence_days",
+        "batch_size",
+        "latest_run",
+        "open_alerts",
+        "heartbeats",
+        "metric_coverage",
+        "recent_events",
+        "area_coefficient"
+      ],
+      "sample_behavior": "database_read"
+    },
+    {
+      "method": "GET",
+      "path": "/stage4/runs",
+      "public_proxy_path": "/api/stage4/runs",
+      "operation_id": "list_stage4_runs",
+      "tag": "stage4",
+      "source_module": "backend/app/api/stage4.py",
+      "parameters": [
+        {
+          "name": "limit",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          },
+          "required": false,
+          "default": 20,
+          "minimum": 1,
+          "maximum": 100
+        },
+        {
+          "name": "region_code",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grid_version",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "production_response_top_level_fields": [
+        "rows"
+      ],
+      "sample_behavior": "database_read"
+    },
+    {
+      "method": "GET",
+      "path": "/stage4/runs/{run_uuid}",
+      "public_proxy_path": "/api/stage4/runs/{run_uuid}",
+      "operation_id": "get_stage4_run",
+      "tag": "stage4",
+      "source_module": "backend/app/api/stage4.py",
+      "parameters": [
+        {
+          "name": "run_uuid",
+          "in": "path",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "required": true
+        }
+      ],
+      "production_response_top_level_fields": [
+        "run",
+        "batches",
+        "alerts",
+        "events"
+      ],
+      "sample_behavior": "database_read"
+    },
+    {
+      "method": "GET",
+      "path": "/stage4/alerts",
+      "public_proxy_path": "/api/stage4/alerts",
+      "operation_id": "list_stage4_alerts",
+      "tag": "stage4",
+      "source_module": "backend/app/api/stage4.py",
+      "parameters": [
+        {
+          "name": "limit",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          },
+          "required": false,
+          "default": 50,
+          "minimum": 1,
+          "maximum": 200
+        },
+        {
+          "name": "status",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": "open"
+        },
+        {
+          "name": "region_code",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grid_version",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "production_response_top_level_fields": [
+        "rows"
+      ],
+      "sample_behavior": "database_read"
+    },
+    {
+      "method": "GET",
+      "path": "/stage4/assets/{cell_uuid}/metrics",
+      "public_proxy_path": "/api/stage4/assets/{cell_uuid}/metrics",
+      "operation_id": "get_stage4_asset_metrics",
+      "tag": "stage4",
+      "source_module": "backend/app/api/stage4.py",
+      "parameters": [
+        {
+          "name": "cell_uuid",
+          "in": "path",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "required": true
+        },
+        {
+          "name": "metric_name",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "months",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          },
+          "required": false,
+          "default": 12,
+          "minimum": 1,
+          "maximum": 36
+        },
+        {
+          "name": "region_code",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grid_version",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "production_response_top_level_fields": [
+        "cell_uuid",
+        "metric_name",
+        "months",
+        "rows"
+      ],
+      "sample_behavior": "database_read"
+    },
+    {
+      "method": "GET",
+      "path": "/stage5/status",
+      "public_proxy_path": "/api/stage5/status",
+      "operation_id": "stage5_status",
+      "tag": "stage5",
+      "source_module": "backend/app/api/stage5.py",
+      "parameters": [
+        {
+          "name": "region_code",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grid_version",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "production_response_top_level_fields": [
+        "stage",
+        "scope",
+        "region_code",
+        "grid_version",
+        "methodology_version",
+        "coefficient_set_version",
+        "coefficient_status",
+        "summary",
+        "methodology",
+        "annual_increment",
+        "recent_events"
+      ],
+      "sample_behavior": "database_read"
+    },
+    {
+      "method": "GET",
+      "path": "/stage5/rules",
+      "public_proxy_path": "/api/stage5/rules",
+      "operation_id": "stage5_rules",
+      "tag": "stage5",
+      "source_module": "backend/app/api/stage5.py",
+      "parameters": [
+        {
+          "name": "region_code",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grid_version",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "production_response_top_level_fields": [
+        "stage",
+        "scope",
+        "region_code",
+        "grid_version",
+        "active_rule",
+        "config"
+      ],
+      "sample_behavior": "private_calculation_omitted"
+    },
+    {
+      "method": "POST",
+      "path": "/stage5/rules/validate",
+      "public_proxy_path": "/api/stage5/rules/validate",
+      "operation_id": "validate_stage5_rules",
+      "tag": "stage5",
+      "source_module": "backend/app/api/stage5.py",
+      "parameters": [
+        {
+          "name": "payload",
+          "in": "body",
+          "schema": {
+            "type": "object"
+          },
+          "required": true,
+          "default": null
+        }
+      ],
+      "production_response_top_level_fields": [
+        "valid",
+        "stage",
+        "scope",
+        "config"
+      ],
+      "sample_behavior": "private_calculation_omitted"
+    },
+    {
+      "method": "PUT",
+      "path": "/stage5/rules",
+      "public_proxy_path": "/api/stage5/rules",
+      "operation_id": "save_stage5_rules",
+      "tag": "stage5",
+      "source_module": "backend/app/api/stage5.py",
+      "parameters": [
+        {
+          "name": "payload",
+          "in": "body",
+          "schema": {
+            "type": "object"
+          },
+          "required": true,
+          "default": null
+        },
+        {
+          "name": "region_code",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grid_version",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_by",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": "api",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        {
+          "name": "x-stage5-rules-token",
+          "python_name": "rules_token",
+          "in": "header",
+          "required": false,
+          "default": null,
+          "nullable": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "production_response_top_level_fields": [
+        "saved",
+        "stage",
+        "scope",
+        "active_rule",
+        "config",
+        "recalculation_required"
+      ],
+      "sample_behavior": "private_calculation_omitted"
+    },
+    {
+      "method": "POST",
+      "path": "/stage5/rules/reset",
+      "public_proxy_path": "/api/stage5/rules/reset",
+      "operation_id": "reset_stage5_rules",
+      "tag": "stage5",
+      "source_module": "backend/app/api/stage5.py",
+      "parameters": [
+        {
+          "name": "region_code",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grid_version",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "x-stage5-rules-token",
+          "python_name": "rules_token",
+          "in": "header",
+          "required": false,
+          "default": null,
+          "nullable": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "production_response_top_level_fields": [
+        "reset",
+        "retired_rules",
+        "stage",
+        "scope",
+        "region_code",
+        "grid_version",
+        "config",
+        "recalculation_required"
+      ],
+      "sample_behavior": "private_calculation_omitted"
+    },
+    {
+      "method": "GET",
+      "path": "/stage5/rules/history",
+      "public_proxy_path": "/api/stage5/rules/history",
+      "operation_id": "stage5_rules_history",
+      "tag": "stage5",
+      "source_module": "backend/app/api/stage5.py",
+      "parameters": [
+        {
+          "name": "limit",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          },
+          "required": false,
+          "default": 100,
+          "minimum": 1,
+          "maximum": 500
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          },
+          "required": false,
+          "default": 0,
+          "minimum": 0
+        },
+        {
+          "name": "region_code",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grid_version",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "production_response_top_level_fields": [
+        "limit",
+        "offset",
+        "rows"
+      ],
+      "sample_behavior": "private_calculation_omitted"
+    },
+    {
+      "method": "GET",
+      "path": "/stage5/reports/anomalies",
+      "public_proxy_path": "/api/stage5/reports/anomalies",
+      "operation_id": "stage5_anomaly_report",
+      "tag": "stage5",
+      "source_module": "backend/app/api/stage5.py",
+      "parameters": [
+        {
+          "name": "limit",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          },
+          "required": false,
+          "default": 100,
+          "minimum": 1,
+          "maximum": 1000
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          },
+          "required": false,
+          "default": 0,
+          "minimum": 0
+        },
+        {
+          "name": "anomaly_type",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": "anomaly"
+        },
+        {
+          "name": "region_code",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grid_version",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "production_response_top_level_fields": [
+        "limit",
+        "offset",
+        "total",
+        "rows"
+      ],
+      "sample_behavior": "database_read"
+    },
+    {
+      "method": "GET",
+      "path": "/stage5/exports/carbon.csv",
+      "public_proxy_path": "/api/stage5/exports/carbon.csv",
+      "operation_id": "export_stage5_carbon_csv",
+      "tag": "stage5",
+      "source_module": "backend/app/api/stage5.py",
+      "parameters": [
+        {
+          "name": "limit",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          },
+          "required": false,
+          "default": 10000,
+          "minimum": 1,
+          "maximum": 100000
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          },
+          "required": false,
+          "default": 0,
+          "minimum": 0
+        },
+        {
+          "name": "status",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "anomaly_type",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "region_code",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grid_version",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "production_response_top_level_fields": [],
+      "sample_behavior": "database_read"
+    },
+    {
+      "method": "GET",
+      "path": "/stage5/exports/carbon.geojson",
+      "public_proxy_path": "/api/stage5/exports/carbon.geojson",
+      "operation_id": "export_stage5_carbon_geojson",
+      "tag": "stage5",
+      "source_module": "backend/app/api/stage5.py",
+      "parameters": [
+        {
+          "name": "limit",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          },
+          "required": false,
+          "default": 10000,
+          "minimum": 1,
+          "maximum": 10000
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          },
+          "required": false,
+          "default": 0,
+          "minimum": 0
+        },
+        {
+          "name": "status",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "anomaly_type",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "region_code",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grid_version",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "production_response_top_level_fields": [
+        "type",
+        "features"
+      ],
+      "sample_behavior": "database_read"
+    },
+    {
+      "method": "GET",
+      "path": "/stage5/exports/carbon.shp.zip",
+      "public_proxy_path": "/api/stage5/exports/carbon.shp.zip",
+      "operation_id": "export_stage5_carbon_shapefile",
+      "tag": "stage5",
+      "source_module": "backend/app/api/stage5.py",
+      "parameters": [
+        {
+          "name": "limit",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          },
+          "required": false,
+          "default": 10000,
+          "minimum": 1,
+          "maximum": 10000
+        },
+        {
+          "name": "offset",
+          "in": "query",
+          "schema": {
+            "type": "integer"
+          },
+          "required": false,
+          "default": 0,
+          "minimum": 0
+        },
+        {
+          "name": "status",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "anomaly_type",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "default": "all"
+        },
+        {
+          "name": "region_code",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "grid_version",
+          "in": "query",
+          "schema": {
+            "type": "string"
+          },
+          "required": false,
+          "nullable": true,
+          "default": null
+        }
+      ],
+      "production_response_top_level_fields": [],
+      "sample_behavior": "database_read"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ListProjectBackups",
+      "Effect": "Allow",
+      "Action": ["s3:ListBucket"],
+      "Resource": "arn:aws:s3:::REPLACE_CLIENT_BUCKET",
+      "Condition": {"StringLike": {"s3:prefix": ["map1/daily/*", "map1/weekly/*"]}}
+    },
+    {
+      "Sid": "UploadAndVerifyProjectBackups",
+      "Effect": "Allow",
+      "Action": ["s3:PutObject", "s3:GetObject", "s3:AbortMultipartUpload", "s3:ListMultipartUploadParts"],
+      "Resource": ["arn:aws:s3:::REPLACE_CLIENT_BUCKET/map1/daily/*", "arn:aws:s3:::REPLACE_CLIENT_BUCKET/map1/weekly/*"]
+    },
+    {
+      "Sid": "NoBackupDeletionOrRetentionChanges",
+      "Effect": "Deny",
+      "Action": ["s3:DeleteObject", "s3:DeleteObjectVersion", "s3:PutLifecycleConfiguration", "s3:PutBucketVersioning", "s3:PutBucketPolicy", "s3:DeleteBucketPolicy", "s3:DeleteBucket"],
+      "Resource": ["arn:aws:s3:::REPLACE_CLIENT_BUCKET", "arn:aws:s3:::REPLACE_CLIENT_BUCKET/*"]
+    }
+  ]
+}

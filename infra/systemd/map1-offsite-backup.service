@@ -1,0 +1,21 @@
+[Unit]
+Description=Map 1 encrypted external recovery backup
+Wants=docker.service
+After=docker.service network-online.target
+OnFailure=map1-backup-alert@%n.service
+
+[Service]
+Type=oneshot
+User=map1deploy
+Group=map1deploy
+WorkingDirectory=/srv/map1/app
+Environment=ENV_FILE=/srv/map1/app/runtime.env
+Environment=BACKUP_DIR=/srv/map1/backups
+Environment=BACKUP_SOURCE_ARCHIVE=/srv/map1/app/source.tar.gz
+EnvironmentFile=/srv/map1/secrets/backup-job.env
+ExecStart=/srv/map1/app/scripts/backup-offsite.sh
+UMask=0077
+Nice=10
+IOSchedulingClass=best-effort
+IOSchedulingPriority=7
+TimeoutStartSec=12h

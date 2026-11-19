@@ -1,0 +1,22 @@
+[Unit]
+Description=Map 1 application services
+Requires=docker.service
+RequiresMountsFor=/srv/map1/storage
+BindsTo=srv-map1-storage.mount
+After=docker.service network-online.target srv-map1-storage.mount
+StartLimitIntervalSec=600
+StartLimitBurst=3
+
+[Service]
+Type=simple
+WorkingDirectory=/srv/map1/app
+ExecStartPre=/usr/bin/python3 /srv/map1/app/scripts/check-production-storage.py --mount-only --storage-root /srv/map1/storage/production --expected-uuid <LOCAL_STORAGE_UUID>
+ExecStart=/usr/bin/python3 /srv/map1/app/scripts/run-production-services.py run
+KillMode=mixed
+Restart=on-failure
+RestartSec=15
+TimeoutStopSec=300
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target

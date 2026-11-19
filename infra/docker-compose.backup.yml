@@ -1,0 +1,22 @@
+services:
+  backup-transfer:
+    image: infra-backend
+    profiles: ["backup"]
+    user: "${BACKUP_UID:-1000}:${BACKUP_GID:-1000}"
+    working_dir: /recovery
+    entrypoint: ["python", "/recovery/backup_offsite.py"]
+    command: ["check"]
+    env_file:
+      - ${BACKUP_S3_ENV_FILE:?Set BACKUP_S3_ENV_FILE to the private S3 environment file}
+    volumes:
+      - ../scripts/backup_offsite.py:/recovery/backup_offsite.py:ro
+      - ${BACKUP_BUNDLE_DIR:?Set BACKUP_BUNDLE_DIR to the encrypted recovery bundle}:/bundles:ro
+      - ${BACKUP_RESTORE_DIR:-../test-results/backup-restore}:/restore
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    mem_limit: 512m
+    cpus: 1
+    pids_limit: 64

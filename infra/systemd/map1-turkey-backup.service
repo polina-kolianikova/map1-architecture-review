@@ -1,0 +1,11 @@
+[Unit]
+Description=Map 1 Turkey database backup
+Wants=docker.service
+After=docker.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/map1-turkey
+Environment=COMPOSE_FILE=infra/docker-compose.prod.yml
+Environment=ENV_FILE=.env
+ExecStart=/opt/map1-turkey/scripts/backup-db.sh

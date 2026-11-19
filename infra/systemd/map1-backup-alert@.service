@@ -1,0 +1,14 @@
+[Unit]
+Description=Map 1 backup failure notification
+
+[Service]
+Type=oneshot
+User=map1deploy
+Group=map1deploy
+WorkingDirectory=/srv/map1/app
+Environment=BACKUP_BUNDLE_DIR=/srv/map1/backups
+Environment=BACKUP_RESTORE_DIR=/srv/map1/backups/restore
+Environment=ENV_FILE=/srv/map1/app/runtime.env
+EnvironmentFile=/srv/map1/secrets/backup-job.env
+ExecStart=/usr/bin/python3 /srv/map1/app/scripts/backup_alert.py %i
+UMask=0077
